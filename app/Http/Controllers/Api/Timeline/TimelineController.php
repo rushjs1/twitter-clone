@@ -10,12 +10,16 @@ class TimelineController extends Controller
 {
     // auth
 
+     public function __construct()
+    {
+    $this->middleware(['auth:sanctum']);
+    } 
+
+
     public function index(Request $req)
     {
-        //dd($req->user()->tweetsFromFollowing);
+        $tweets = $req->user()->tweetsFromFollowing()->latest()->paginate(6);
 
-        $tweets = $req->user()->tweetsFromFollowing()->paginate(8);
-    
         return new TweetCollection($tweets);
     }
 }

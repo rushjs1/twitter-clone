@@ -505,14 +505,20 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-auto {
   width: auto;
 }
-.w-full {
-  width: 100%;
-}
 .w-12 {
   width: 3rem;
 }
+.w-full {
+  width: 100%;
+}
 .max-w-6xl {
   max-width: 72rem;
+}
+.flex-grow {
+  flex-grow: 1;
+}
+.resize-none {
+  resize: none;
 }
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
@@ -522,6 +528,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .justify-center {
   justify-content: center;
+}
+.justify-between {
+  justify-content: space-between;
 }
 .overflow-hidden {
   overflow: hidden;
@@ -540,6 +549,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .border-t {
   border-top-width: 1px;
+}
+.border-b-8 {
+  border-bottom-width: 8px;
 }
 .border-b {
   border-bottom-width: 1px;
@@ -560,6 +572,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
 }
+.bg-gray-900 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+}
+.bg-blue-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(59 130 246 / var(--tw-bg-opacity));
+}
 .p-6 {
   padding: 1.5rem;
 }
@@ -576,6 +596,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 .px-6 {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
+}
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
 }
 .pt-8 {
   padding-top: 2rem;
@@ -605,6 +633,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .leading-7 {
   line-height: 1.75rem;
+}
+.leading-none {
+  line-height: 1;
 }
 .text-gray-200 {
   --tw-text-opacity: 1;
@@ -646,6 +677,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.outline-none {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
 }
 body {
   --tw-bg-opacity: 1;

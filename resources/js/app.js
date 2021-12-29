@@ -10,6 +10,9 @@ window.Vue = require('vue').default;
 import Vuex from 'vuex'
 Vue.use(Vuex)
 
+import VueObserveVisibility from 'vue-observe-visibility';
+Vue.use(VueObserveVisibility);
+Vue.prototype.$user = User
 
 /**
  * The following block of code may be used to automatically register your
@@ -24,6 +27,7 @@ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(
 
 /* Vue.component('example-component', require('./components/ExampleComponent.vue').default); */
 import timeline from './store/timeline'
+import Vue from 'vue';
 
 const store = new Vuex.Store({
     modules: {
