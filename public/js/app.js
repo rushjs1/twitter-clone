@@ -5278,6 +5278,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   })),
   mounted: function mounted() {
     this.getTweets();
+    console.log("timeline");
   }
 });
 

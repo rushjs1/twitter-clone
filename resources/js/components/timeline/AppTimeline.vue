@@ -20,6 +20,7 @@ export default {
     },
     mounted() {
         this.getTweets();
+        console.log("timeline");
     },
 };
 </script>
