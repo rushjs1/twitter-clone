@@ -1,26 +1,22 @@
 <template>
-    <div
-        class="w-full inline-block p-4 border-b border-gray-800 hover:bg-gray-800"
-    >
-        <!--   <div class="flex w-full">
+    <div>
+        <div class="flex w-full">
             <div class="mr-3">
                 <img :src="tweet.user.avatar" class="w-12 rounded-full" />
             </div>
-            <div>
+            <div class="flex-grow">
                 <app-tweet-username :user="tweet.user" />
                 <p class="text-gray-300">
                     {{ tweet.body }}
                 </p>
             </div>
-        </div> -->
-
-        <component :is="`app-tweet-variant-${tweet.type}`" :tweet="tweet" />
+        </div>
     </div>
 </template>
 
 <script>
 export default {
-    name: "AppTweet",
+    name: "AppTweetVariantTweet",
     props: {
         tweet: {
             required: true,

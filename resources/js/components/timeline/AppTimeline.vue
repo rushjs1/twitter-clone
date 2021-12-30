@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions, mapMutations } from "vuex";
 export default {
     name: "AppTimeline",
     data() {
@@ -36,6 +36,10 @@ export default {
     methods: {
         ...mapActions("timeline", {
             getTweets: "getTweets",
+        }),
+
+        ...mapMutations({
+            PUSH_TWEETS: "timeline/PUSH_TWEETS",
         }),
         handleToScrolledTimeline(isVisible) {
             if (!isVisible) {
@@ -57,6 +61,13 @@ export default {
     },
     mounted() {
         this.loadTweets();
+
+        Echo.private(`timeline.${this.$user.id}`).listen(
+            ".TweetWasCreated",
+            (e) => {
+                this.PUSH_TWEETS([e]);
+            }
+        );
     },
 };
 </script>

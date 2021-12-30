@@ -4,11 +4,7 @@
             <img :src="$user.avatar" class="w-12 rounded-full" />
         </div>
         <div class="flex-grow">
-            <textarea
-                class="bg-gray-900 w-full outline-none text-gray-300 text-lg resize-none"
-                placeholder="What's Happening?"
-                v-model="form.body"
-            ></textarea>
+            <app-tweet-compose-text-area v-model="form.body" />
             <div class="flex justify-between">
                 <div>
                     <!-- actions -->
@@ -40,6 +36,7 @@ export default {
     methods: {
         async submitTweet() {
             await axios.post("/api/tweets", this.form);
+            this.form.body = "";
         },
     },
 };

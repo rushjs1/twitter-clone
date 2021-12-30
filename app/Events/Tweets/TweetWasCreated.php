@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Tweet;
-
+use App\Http\Resources\TweetResource;
 
 class TweetWasCreated implements ShouldBroadcast
 {
@@ -24,6 +24,10 @@ class TweetWasCreated implements ShouldBroadcast
     public function __construct(Tweet $tweet)
     {
         $this->tweet = $tweet;
+    }
+
+    public function broadcastWith(){
+        return (new TweetResource($this->tweet))->jsonSerialize();
     }
 
     public function broadcastAs()

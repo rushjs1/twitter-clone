@@ -3,6 +3,9 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\TweetResource;
+use App\Http\Resources\UserResource;
+
 
 class TweetResource extends JsonResource
 {
@@ -17,7 +20,10 @@ class TweetResource extends JsonResource
         return [
             'id' => $this->id,
             'body' => $this->body,
-            'user' => new UserResource($this->user)
+            'type' => $this->type,
+            'original_tweet' => new TweetResource($this->originalTweet),
+            'user' => new UserResource($this->user),
+            'created_at' => $this->created_at->timestamp
         ];
     }
 }
