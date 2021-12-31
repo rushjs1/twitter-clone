@@ -26,12 +26,16 @@ const files = require.context('./', true, /\.vue$/i)
 files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 /* Vue.component('example-component', require('./components/ExampleComponent.vue').default); */
-import timeline from './store/timeline'
+import timeline from './store/timeline';
+import likes from './store/likes';
+
 import Vue from 'vue';
+//import Echo from 'laravel-echo';
 
 const store = new Vuex.Store({
     modules: {
-        timeline
+        timeline,
+        likes
     }
 })
 
@@ -45,3 +49,13 @@ const app = new Vue({
     el: '#app',
     store
 });
+
+Echo.channel('tweets').listen('.TweetLikesWereUpdated', (e) => {
+    if(e.user_id === User.id)
+    {
+        store.dispatch('likes/syncLike', e.id);
+    }
+    store.commit('timeline/SET_LIKES', e);
+
+
+})

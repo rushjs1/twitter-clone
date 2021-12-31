@@ -5,7 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
+use App\Models\Like;
+
 use Illuminate\Database\Eloquent\Relationships\HasOne;
+use illuminate\Database\Eloquent\Relationships\HasMany;
+
 
 class Tweet extends Model
 {
@@ -24,4 +28,9 @@ class Tweet extends Model
         return $this->hasOne(Tweet::class, 'id', 'original_tweet_id');
     }
 
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+
+    }
 }

@@ -1,11 +1,11 @@
 import axios from 'axios';
+import {get} from 'lodash';
 
 
 export default {
     namespaced: true,
     state: {
         tweets: [],
-
     },
     getters: {
         tweets(state){
@@ -20,6 +20,18 @@ export default {
             })
         )
 
+     },
+
+     SET_LIKES(state, {id, count}){
+            state.tweets = state.tweets.map((t) => {
+                if (t.id === id){
+                    t.likes_count = count;
+                }
+                if(get(t.original_tweet, 'id') === id) {
+                    t.original_tweet.likes_count = count
+                }
+                return t
+            })
      }
     },
     actions: {
@@ -28,6 +40,8 @@ export default {
          let res = await axios.get(url);
 
         commit('PUSH_TWEETS', res.data.data);
+        
+        commit('likes/PUSH_LIKES', res.data.likes, {root: true} )
         return res;
      }
     }

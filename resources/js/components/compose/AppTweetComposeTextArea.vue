@@ -5,7 +5,7 @@
             placeholder="What's Happening?"
             autofocus
             @input="
-                emitInput;
+                emitInput($event);
                 resize($event);
             "
             :value="value"
@@ -26,7 +26,6 @@ export default {
             this.$emit("input", e.target.value);
         },
         resize(e) {
-            console.log(e);
             e.target.style.height = "auto";
             e.target.style.height = `${e.target.scrollHeight}px`;
         },

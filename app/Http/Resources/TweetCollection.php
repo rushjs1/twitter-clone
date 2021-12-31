@@ -20,7 +20,22 @@ class TweetCollection extends ResourceCollection
     {
         return [
             'data' => $this->collection
-
         ];
+    }
+    public function with($request)
+    {
+        return [
+            'likes' => $this->likes($request)
+        ];
+    }
+
+    protected function likes($request)
+    {
+        if(!$user = $request->user())
+        {
+            return [];
+        }
+        return $user->likes()->whereIn('tweet_id', $this->collection->pluck('id'))->pluck('tweet_id')->toArray();
+
     }
 }

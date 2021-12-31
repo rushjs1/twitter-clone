@@ -47,6 +47,12 @@ class User extends Authenticatable
         return 'https://www.gravatar.com/avatar/' . md5($this->email) . '?d=mp';
     }
 
+    public function hasLiked(Tweet $tweet){
+        return $this->likes->contains('tweet_id', $tweet->id);
+    }
+
+
+    
     public function tweets()
     {
         return $this->hasMany(Tweet::class);
@@ -71,4 +77,9 @@ class User extends Authenticatable
             Tweet::class, follower::class, 'user_id', 'user_id', 'id', 'following_id'
         );
     } 
+    
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
 }
