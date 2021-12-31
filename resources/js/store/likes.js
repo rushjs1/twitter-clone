@@ -1,5 +1,4 @@
 import axios from "axios";
-import {without} from 'lodash';
 
 export default {
     namespaced: true,
@@ -25,8 +24,9 @@ export default {
 
         },
         POP_LIKE(state, data){
-            state.likes = without(state.likes, data);
-
+            const likeIndex = state.likes.findIndex((id) => id === data);
+            state.likes.splice(likeIndex, 1);
+    
         }
     },
 
