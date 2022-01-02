@@ -1,19 +1,11 @@
 <template>
     <div>
-        <app-dropdown>
+        <app-dropdown v-if="!retweeted">
             <template slot="trigger">
-                <div class="flex items-center text-base">
-                    <icon-repeat :isRetweeted="retweeted" />
-                    <span
-                        class="text-gray-600"
-                        :class="{ 'text-green-600': retweeted }"
-                    >
-                        {{ tweet.retweets_count }}
-                    </span>
-                </div>
+                <app-tweet-retweet-action-button :tweet="tweet" />
             </template>
 
-            <app-dropdown-item @click.prevent="retweet">
+            <app-dropdown-item @click.prevent="retweetOrUnretweet">
                 Retweet
             </app-dropdown-item>
 
@@ -21,14 +13,21 @@
                 Retweet with comment
             </app-dropdown-item>
         </app-dropdown>
+        <app-tweet-retweet-action-button
+            v-else
+            :tweet="tweet"
+            @click.prevent="retweetOrUnretweet"
+        />
     </div>
 </template>
 <script>
 import AppDropdownItem from "../../dropdown/AppDropdownItem.vue";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
+
+import AppTweetRetweetActionButton from "./AppTweetRetweetActionButton.vue";
 
 export default {
-    components: { AppDropdownItem },
+    components: { AppDropdownItem, AppTweetRetweetActionButton },
     name: "AppTweetRetweetAction",
     props: {
         tweet: {
@@ -45,6 +44,19 @@ export default {
         },
     },
     methods: {
+        ...mapActions("retweets", {
+            retweetTweet: "retweetTweet",
+            unretweetTweet: "unretweetTweet",
+        }),
+        retweetOrUnretweet() {
+            console.log("running");
+            if (this.retweeted) {
+                this.unretweetTweet(this.tweet);
+                return;
+            }
+            this.retweetTweet(this.tweet);
+        },
+
         retweet() {
             console.log("retweet");
         },

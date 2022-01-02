@@ -60,4 +60,10 @@ Echo.channel('tweets').listen('.TweetLikesWereUpdated', (e) => {
     store.commit('timeline/SET_LIKES', e);
 
 
+}).listen('.TweetRetweetsWereUpdated', (e) => {
+    console.log(e);
+    if(e.user_id === User.id){
+        store.dispatch('retweets/syncRetweet', e.id)
+    }
+    store.commit('timeline/SET_RETWEETS', e)
 })
