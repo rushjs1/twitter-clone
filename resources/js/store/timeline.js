@@ -44,6 +44,7 @@ export default {
         commit('PUSH_TWEETS', res.data.data);
         
         commit('likes/PUSH_LIKES', res.data.likes, {root: true} )
+        commit('retweets/PUSH_RETWEETS', res.data.retweets, {root: true})
         return res;
      }
     }
