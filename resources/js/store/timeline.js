@@ -21,6 +21,10 @@ export default {
         )
 
      },
+     POP_TWEET(state, id) {
+        state.tweets = state.tweets.filter((t) => t.id !== id);
+        
+     },
 
      SET_LIKES(state, {id, count}){
             state.tweets = state.tweets.map((t) => {
