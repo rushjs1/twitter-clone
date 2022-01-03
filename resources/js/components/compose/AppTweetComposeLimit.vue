@@ -67,7 +67,10 @@ export default {
             return this.percentage <= 100 ? this.percentage : 100;
         },
         percentageValidated() {
-            if (this.percentage > 100 || this.percentageNotRounded === 0) {
+            if (
+                this.percentageNotRounded > 100 ||
+                this.percentageNotRounded === 0
+            ) {
                 return true;
             } else {
                 return false;

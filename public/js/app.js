@@ -5498,7 +5498,7 @@ __webpack_require__.r(__webpack_exports__);
       return this.percentage <= 100 ? this.percentage : 100;
     },
     percentageValidated: function percentageValidated() {
-      if (this.percentage > 100 || this.percentageNotRounded === 0) {
+      if (this.percentageNotRounded > 100 || this.percentageNotRounded === 0) {
         return true;
       } else {
         return false;
@@ -5960,6 +5960,11 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
 //
 //
 //
@@ -43097,7 +43102,11 @@ var render = function () {
       ),
       _vm._v(" "),
       _vm._l(_vm.tweets, function (tweet) {
-        return _c("app-tweet", { key: tweet.id, attrs: { tweet: tweet } })
+        return _c("app-tweet", {
+          key: tweet.id,
+          staticClass: "w-full",
+          attrs: { tweet: tweet },
+        })
       }),
       _vm._v(" "),
       _vm.tweets.length

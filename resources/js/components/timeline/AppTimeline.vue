@@ -4,7 +4,12 @@
             <app-tweet-compose />
         </div>
 
-        <app-tweet v-for="tweet in tweets" :key="tweet.id" :tweet="tweet" />
+        <app-tweet
+            class="w-full"
+            v-for="tweet in tweets"
+            :key="tweet.id"
+            :tweet="tweet"
+        />
 
         <div
             v-if="tweets.length"
