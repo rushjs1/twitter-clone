@@ -1,20 +1,34 @@
 <template>
     <form class="flex" @submit.prevent="submitTweet">
-        <div class="mr-2">
-            <img :src="$user.avatar" class="w-12 rounded-full" />
-        </div>
+        <img :src="$user.avatar" class="mr-3 w-12 h-12 rounded-full" />
         <div class="flex-grow">
             <app-tweet-compose-text-area v-model="form.body" />
+            <app-tweet-image-preview
+                :images="media.images"
+                v-if="media.images.length"
+                @removed="removeImage"
+            />
+            <app-tweet-video-preview
+                v-if="media.video"
+                :video="media.video"
+                @removed="removeVideo"
+            />
             <div class="flex justify-between">
-                <div>
-                    <!-- actions -->
-                </div>
+                <ul class="flex items-center">
+                    <li class="mr-4">
+                        <app-tweet-compose-media-button
+                            id="media-compose"
+                            @selected="handleMediaSelected"
+                        />
+                    </li>
+                </ul>
+
                 <div class="flex items-center justify-end">
                     <div>
                         <app-tweet-compose-limit
                             class="mr-2"
                             :body="form.body"
-                            v-model="percentIsOver"
+                            v-model="percentValidated"
                         />
                     </div>
                     <button
@@ -36,15 +50,21 @@ export default {
     name: "AppTweetCompose",
     data() {
         return {
+            mediaTypes: {},
+            media: {
+                images: [],
+                video: null,
+            },
             form: {
                 body: "",
+                media: [],
             },
-            percentIsOver: false,
+            percentValidated: false,
         };
     },
     watch: {
-        percentIsOver() {
-            if (this.percentIsOver) {
+        percentValidated() {
+            if (this.percentValidated) {
                 this.$refs.tweetBtn.disabled = true;
 
                 this.$refs.tweetBtn.className =
@@ -61,6 +81,37 @@ export default {
             await axios.post("/api/tweets", this.form);
             this.form.body = "";
         },
+        async getMediaTypes() {
+            let res = await axios.get("/api/media/types");
+            this.mediaTypes = res.data.data;
+        },
+        handleMediaSelected(files) {
+            console.log(files);
+            Array.from(files)
+                .slice(0, 4)
+                .forEach((file) => {
+                    if (this.mediaTypes.image.includes(file.type)) {
+                        this.media.images.push(file);
+                    }
+
+                    if (this.mediaTypes.video.includes(file.type)) {
+                        this.media.video = file;
+                    }
+                });
+
+            if (this.media.video) {
+                this.media.images = [];
+            }
+        },
+        removeVideo() {
+            this.media.video = null;
+        },
+        removeImage(img) {
+            this.media.images = this.media.images.filter((i) => img !== i);
+        },
+    },
+    mounted() {
+        this.getMediaTypes();
     },
 };
 </script>

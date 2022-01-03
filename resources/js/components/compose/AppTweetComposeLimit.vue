@@ -21,8 +21,8 @@
                 :stroke-dasharray="dash"
                 :stroke-dashoffset="offset"
                 :class="{
-                    'text-red-500': percentageIsOver,
-                    'text-blue-700': !percentageIsOver,
+                    'text-red-500': percentageValidated,
+                    'text-blue-700': !percentageValidated,
                 }"
             />
         </svg>
@@ -44,8 +44,8 @@ export default {
         };
     },
     watch: {
-        percentageIsOver() {
-            this.$emit("input", this.percentageIsOver);
+        percentageValidated() {
+            this.$emit("input", this.percentageValidated);
         },
     },
     computed: {
@@ -60,13 +60,22 @@ export default {
         percentage() {
             return Math.round((this.body.length * 100) / 280);
         },
+        percentageNotRounded() {
+            return (this.body.length * 100) / 280;
+        },
         displayPercentage() {
             return this.percentage <= 100 ? this.percentage : 100;
         },
-        percentageIsOver() {
-            // this.$emit("input", this.percentageIsOver);
-            return this.percentage > 100;
+        percentageValidated() {
+            if (this.percentage > 100 || this.percentageNotRounded === 0) {
+                return true;
+            } else {
+                return false;
+            }
         },
+    },
+    beforeMount() {
+        this.$emit("input", this.percentageValidated);
     },
 };
 </script>
