@@ -9,8 +9,16 @@
                 <div>
                     <!-- actions -->
                 </div>
-                <div>
+                <div class="flex items-center justify-end">
+                    <div>
+                        <app-tweet-compose-limit
+                            class="mr-2"
+                            :body="form.body"
+                            v-model="percentIsOver"
+                        />
+                    </div>
                     <button
+                        ref="tweetBtn"
                         type="submit"
                         class="bg-blue-500 rounded-full text-gray-300 text-center px-4 py-3 font-bold leading-none"
                     >
@@ -31,7 +39,22 @@ export default {
             form: {
                 body: "",
             },
+            percentIsOver: false,
         };
+    },
+    watch: {
+        percentIsOver() {
+            if (this.percentIsOver) {
+                this.$refs.tweetBtn.disabled = true;
+
+                this.$refs.tweetBtn.className =
+                    "bg-blue-900 rounded-full text-gray-300 text-center px-4 py-3 font-bold leading-none";
+            } else {
+                this.$refs.tweetBtn.disabled = false;
+                this.$refs.tweetBtn.className =
+                    "bg-blue-500 rounded-full text-gray-300 text-center px-4 py-3 font-bold leading-none";
+            }
+        },
     },
     methods: {
         async submitTweet() {
