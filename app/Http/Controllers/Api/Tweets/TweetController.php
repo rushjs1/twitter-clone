@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Events\Tweets\TweetWasCreated;
 use App\Http\Requests\Tweets\TweetStoreRequest;
+use App\Models\TweetMedia;
 
 class TweetController extends Controller
 {
@@ -23,6 +24,10 @@ class TweetController extends Controller
       $tweet = $req->user()->tweets()->create(array_merge($req->only('body'),[
         'type' => TweetType::TWEET
       ]));
+
+      foreach($req->media as $id){
+        $tweet->media()->save(TweetMedia::find($id));
+      }
 
       broadcast(new TweetWasCreated($tweet));
     }
