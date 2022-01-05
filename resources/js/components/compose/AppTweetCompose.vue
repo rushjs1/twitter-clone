@@ -78,8 +78,28 @@ export default {
     },
     methods: {
         async submitTweet() {
-            await axios.post("/api/tweets", this.form);
+            await this.uploadMedia();
+            //await axios.post("/api/tweets", this.form);
             this.form.body = "";
+        },
+        buildMediaForm() {
+            let form = new FormData();
+            if (this.media.images.length) {
+                this.media.images.forEach((image, index) => {
+                    form.append(`media[${index}]`, image);
+                });
+            }
+            if (this.media.video) {
+                form.append(`media[0]`, this.media.video);
+            }
+            return form;
+        },
+        async uploadMedia() {
+            return await axios.post("/api/media", this.buildMediaForm(), {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            });
         },
         async getMediaTypes() {
             let res = await axios.get("/api/media/types");

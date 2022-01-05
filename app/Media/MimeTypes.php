@@ -14,4 +14,10 @@ class MimeTypes
         'video/quicktime'
     ];
 
+
+    public static function all() 
+    {
+        return array_merge(self::$image, self::$video);
+    }
+
 }
