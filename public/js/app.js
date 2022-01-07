@@ -6572,6 +6572,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -6609,6 +6613,12 @@ __webpack_require__.r(__webpack_exports__);
       console.log(this.newUrls); // return this.tweet.media.data.filter((m) => m.type === "image");
 
       return this.newUrls;
+    },
+    video: function video() {
+      var vid = this.tweet.media.data.filter(function (m) {
+        return m.type === "video";
+      });
+      return vid;
     }
   }
 });
@@ -43715,6 +43725,15 @@ var render = function () {
                 }),
                 0
               )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.video
+            ? _c("div", { staticClass: "mt-4 mb-4" }, [
+                _c("video", {
+                  staticClass: "rounded-lg",
+                  attrs: { src: _vm.video.url, controls: "" },
+                }),
+              ])
             : _vm._e(),
           _vm._v(" "),
           _c("app-tweet-action-group", { attrs: { tweet: _vm.tweet } }),
