@@ -17,8 +17,8 @@
                     </div>
                 </div>
 
-                <div v-if="video" class="mt-4 mb-4">
-                    <video :src="video.url" controls class="rounded-lg"></video>
+                <div v-if="hasVideo" class="mt-4 mb-4">
+                    <video :src="video" controls class="rounded-lg"></video>
                 </div>
 
                 <app-tweet-action-group :tweet="tweet" />
@@ -43,6 +43,7 @@ export default {
     data() {
         return {
             newUrls: [],
+            newVidUrls: [],
         };
     },
     computed: {
@@ -53,14 +54,31 @@ export default {
                 let newUrl = url.replace("localhost", "twitter.test");
                 this.newUrls.push(newUrl);
             });
-            console.log(this.newUrls);
+            //console.log(this.newUrls);
             // return this.tweet.media.data.filter((m) => m.type === "image");
             return this.newUrls;
         },
         video() {
             let vid = this.tweet.media.data.filter((m) => m.type === "video");
-            return vid;
+
+            console.log(vid);
+
+            vid.forEach((v) => {
+                let url = vid[0].url;
+                this.newVidUrls = url.replace("localhost", "twitter.test");
+            });
+
+            return this.newVidUrls;
         },
+        hasVideo() {
+            return (
+                Object.entries(this.tweet.media.data).length > 0 &&
+                this.tweet.media.data[0].type === "video"
+            );
+        },
+    },
+    mounted() {
+        console.log(this.tweet);
     },
 };
 </script>

@@ -6594,7 +6594,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      newUrls: []
+      newUrls: [],
+      newVidUrls: []
     };
   },
   computed: {
@@ -6609,17 +6610,30 @@ __webpack_require__.r(__webpack_exports__);
         var newUrl = url.replace("localhost", "twitter.test");
 
         _this.newUrls.push(newUrl);
-      });
-      console.log(this.newUrls); // return this.tweet.media.data.filter((m) => m.type === "image");
+      }); //console.log(this.newUrls);
+      // return this.tweet.media.data.filter((m) => m.type === "image");
 
       return this.newUrls;
     },
     video: function video() {
+      var _this2 = this;
+
       var vid = this.tweet.media.data.filter(function (m) {
         return m.type === "video";
       });
-      return vid;
+      console.log(vid);
+      vid.forEach(function (v) {
+        var url = vid[0].url;
+        _this2.newVidUrls = url.replace("localhost", "twitter.test");
+      });
+      return this.newVidUrls;
+    },
+    hasVideo: function hasVideo() {
+      return Object.entries(this.tweet.media.data).length > 0 && this.tweet.media.data[0].type === "video";
     }
+  },
+  mounted: function mounted() {
+    console.log(this.tweet);
   }
 });
 
@@ -43727,11 +43741,11 @@ var render = function () {
               )
             : _vm._e(),
           _vm._v(" "),
-          _vm.video
+          _vm.hasVideo
             ? _c("div", { staticClass: "mt-4 mb-4" }, [
                 _c("video", {
                   staticClass: "rounded-lg",
-                  attrs: { src: _vm.video.url, controls: "" },
+                  attrs: { src: _vm.video, controls: "" },
                 }),
               ])
             : _vm._e(),
