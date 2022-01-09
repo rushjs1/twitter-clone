@@ -3,6 +3,8 @@
         <img :src="$user.avatar" class="mr-3 w-12 h-12 rounded-full" />
         <div class="flex-grow">
             <app-tweet-compose-text-area v-model="form.body" />
+
+            <span class="text-white">{{ media.progress }}</span>
             <app-tweet-image-preview
                 :images="media.images"
                 v-if="media.images.length"
@@ -54,6 +56,7 @@ export default {
             media: {
                 images: [],
                 video: null,
+                progress: 0,
             },
             form: {
                 body: "",
@@ -104,6 +107,7 @@ export default {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
+                onUploadProgress: this.handleUploadProgress,
             });
         },
         async getMediaTypes() {
@@ -133,6 +137,12 @@ export default {
         },
         removeImage(img) {
             this.media.images = this.media.images.filter((i) => img !== i);
+        },
+        handleUploadProgress(event) {
+            console.log(event);
+            this.media.progress = parseInt(
+                Math.round((event.loaded / event.total) * 100)
+            );
         },
     },
     mounted() {
