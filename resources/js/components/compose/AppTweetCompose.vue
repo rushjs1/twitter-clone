@@ -4,7 +4,12 @@
         <div class="flex-grow">
             <app-tweet-compose-text-area v-model="form.body" />
 
-            <span class="text-white">{{ media.progress }}</span>
+            <app-tweet-media-progress
+                class="mb-4"
+                :progress="media.progress"
+                v-if="media.progress && tweetHasMedia"
+            />
+
             <app-tweet-image-preview
                 :images="media.images"
                 v-if="media.images.length"
@@ -48,6 +53,7 @@
 
 <script>
 import axios from "axios";
+
 export default {
     name: "AppTweetCompose",
     data() {
@@ -79,10 +85,18 @@ export default {
             }
         },
     },
+    computed: {
+        tweetHasMedia() {
+            return this.media.images.length || this.media.video;
+        },
+    },
     methods: {
         async submitTweet() {
-            let media = await this.uploadMedia();
-            this.form.media = media.data.data.map((r) => r.id);
+            if (this.tweetHasMedia) {
+                let media = await this.uploadMedia();
+                this.form.media = media.data.data.map((r) => r.id);
+            }
+
             await axios.post("/api/tweets", this.form);
 
             this.form.body = "";
