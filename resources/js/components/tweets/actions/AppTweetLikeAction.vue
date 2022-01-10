@@ -1,6 +1,9 @@
 <template>
     <div>
-        <div class="flex items-center text-base" @click.prevent="likeOrUnlike">
+        <div
+            class="flex items-center text-base hover:bg-red-600/70 rounded-lg"
+            @click.prevent="likeOrUnlike"
+        >
             <icon-heart :liked="liked" />
             <span class="text-gray-600">
                 {{ tweet.likes_count }}

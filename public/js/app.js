@@ -6274,6 +6274,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AppTweetLikeAction",
@@ -43544,7 +43547,8 @@ var render = function () {
     _c(
       "div",
       {
-        staticClass: "flex items-center text-base",
+        staticClass:
+          "flex items-center text-base hover:bg-red-600/70 rounded-lg",
         on: {
           click: function ($event) {
             $event.preventDefault()
