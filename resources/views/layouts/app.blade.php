@@ -28,6 +28,7 @@
     <div id="app">
         <main class="container mx-auto">
             @yield('content')
+            <modal name="modal" />
         </main>
     </div>
 </body>

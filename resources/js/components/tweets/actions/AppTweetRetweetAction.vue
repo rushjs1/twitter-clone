@@ -23,11 +23,15 @@
 <script>
 import AppDropdownItem from "../../dropdown/AppDropdownItem.vue";
 import { mapGetters, mapActions } from "vuex";
-
 import AppTweetRetweetActionButton from "./AppTweetRetweetActionButton.vue";
+import AppTweetRetweetModal from "./../../customComponents/modals/AppTweetRetweetModal.vue";
 
 export default {
-    components: { AppDropdownItem, AppTweetRetweetActionButton },
+    components: {
+        AppDropdownItem,
+        AppTweetRetweetActionButton,
+        AppTweetRetweetModal,
+    },
     name: "AppTweetRetweetAction",
     props: {
         tweet: {
@@ -62,6 +66,7 @@ export default {
         },
         quote() {
             console.log("quote");
+            this.$modal.show(AppTweetRetweetModal);
         },
     },
 };

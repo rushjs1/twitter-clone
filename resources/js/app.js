@@ -12,7 +12,21 @@ Vue.use(Vuex)
 
 import VueObserveVisibility from 'vue-observe-visibility';
 Vue.use(VueObserveVisibility);
+
+import VModal from 'vue-js-modal';
+Vue.use(VModal, {
+    dynamic: true,
+    injectModalsContainer: true,
+    dynamicDefaults: {
+        pivotY: 0.1,
+        height: 'auto',
+        classes: ''
+    }
+})
+ 
+
 Vue.prototype.$user = User
+
 
 /**
  * The following block of code may be used to automatically register your
