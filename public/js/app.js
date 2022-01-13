@@ -5832,8 +5832,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "AppTweetRetweetModal"
+  name: "AppTweetRetweetModal",
+  props: {
+    tweet: {
+      required: true,
+      type: Object
+    }
+  }
 });
 
 /***/ }),
@@ -6450,7 +6463,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     quote: function quote() {
       console.log("quote");
-      this.$modal.show(_customComponents_modals_AppTweetRetweetModal_vue__WEBPACK_IMPORTED_MODULE_2__["default"]);
+      this.$modal.show(_customComponents_modals_AppTweetRetweetModal_vue__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        tweet: this.tweet
+      });
     }
   })
 });
@@ -6755,7 +6770,7 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use((vue_js_modal__WEBPACK_IMPORTED_
   dynamicDefaults: {
     pivotY: 0.1,
     height: 'auto',
-    classes: ''
+    classes: '!bg-gray-900 rounded-lg p-4'
   }
 });
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.$user = User;
@@ -43189,7 +43204,19 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("modal content")])
+  return _c(
+    "div",
+    [
+      _vm.tweet
+        ? _c("app-tweet-variant-" + _vm.tweet.type, {
+            tag: "component",
+            staticClass: "border border-gray-700 rounded-lg mt-4 p-4",
+            attrs: { tweet: _vm.tweet },
+          })
+        : _vm._e(),
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

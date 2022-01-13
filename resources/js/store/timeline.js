@@ -27,17 +27,16 @@ export default {
      },
 
      SET_LIKES(state, {id, count}){
-            state.tweets = state.tweets.map((t) => {
+             state.tweets = state.tweets.map((t) => {
                 if (t.id === id){
                     t.likes_count = count;
                 }
-
-                if(get(t.original_tweet, 'id') === id) {
+             
+                   if(get(t.original_tweet, 'id') === id) {
                     t.original_tweet.likes_count = count
-                } 
-
+                }    
                 return t
-            })
+            }) 
      },
      SET_RETWEETS(state, {id, count})
      {

@@ -66,7 +66,9 @@ export default {
         },
         quote() {
             console.log("quote");
-            this.$modal.show(AppTweetRetweetModal);
+            this.$modal.show(AppTweetRetweetModal, {
+                tweet: this.tweet,
+            });
         },
     },
 };
