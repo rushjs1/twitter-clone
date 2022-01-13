@@ -2,7 +2,7 @@
     <div>
         <textarea
             class="bg-gray-900 w-full outline-none text-gray-300 text-lg resize-none"
-            placeholder="What's Happening?"
+            :placeholder="placeholder"
             autofocus
             @input="
                 emitInput($event);
@@ -19,6 +19,10 @@ export default {
     props: {
         value: {
             required: false,
+        },
+        placeholder: {
+            required: false,
+            type: String,
         },
     },
     methods: {
