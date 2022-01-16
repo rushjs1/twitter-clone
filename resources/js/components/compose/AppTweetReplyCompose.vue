@@ -4,14 +4,30 @@
         <div class="flex-grow">
             <app-tweet-compose-text-area
                 v-model="form.body"
-                :placeholder="'Add a comment'"
+                :placeholder="'Tweet Your Reply'"
             />
 
+            <app-tweet-media-progress
+                class="mb-4"
+                :progress="media.progress"
+                v-if="media.progress && tweetHasMedia"
+            />
+
+            <app-tweet-image-preview
+                :images="media.images"
+                v-if="media.images.length"
+                @removed="removeImage"
+            />
+            <app-tweet-video-preview
+                v-if="media.video"
+                :video="media.video"
+                @removed="removeVideo"
+            />
             <div class="flex justify-between">
                 <ul class="flex items-center">
                     <li class="mr-4">
                         <app-tweet-compose-media-button
-                            id="media-compose"
+                            id="media-compose-reply"
                             @selected="handleMediaSelected"
                         />
                     </li>
@@ -30,7 +46,7 @@
                         type="submit"
                         class="bg-blue-500 rounded-full text-gray-300 text-center px-4 py-3 font-bold leading-none"
                     >
-                        Retweet
+                        Reply
                     </button>
                 </div>
             </div>
@@ -41,7 +57,6 @@
 <script>
 import compose from "../../mixins/compose";
 import axios from "axios";
-import { mapActions } from "vuex";
 export default {
     mixins: [compose],
     props: {
@@ -51,15 +66,8 @@ export default {
         },
     },
     methods: {
-        ...mapActions("timeline", {
-            quoteTweet: "quoteTweet",
-        }),
         async post() {
-            await this.quoteTweet({
-                tweet: this.tweet,
-                data: this.form,
-            });
-            this.$emit("success");
+            console.log("reply");
         },
     },
 };

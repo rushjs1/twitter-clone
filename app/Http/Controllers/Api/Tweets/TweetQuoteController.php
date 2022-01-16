@@ -19,7 +19,7 @@ class TweetQuoteController extends Controller
             'body' => $request->body,
             'original_tweet_id' => $tweet->id
         ]);
-       // broadcast(new TweetWasCreated($retweet));
-       // broadcast(new TweetRetweetsWereUpdated($request->user(), $tweet));
+        broadcast(new TweetWasCreated($retweet));
+        broadcast(new TweetRetweetsWereUpdated($request->user(), $tweet));
     }
 }

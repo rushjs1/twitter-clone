@@ -20,11 +20,13 @@ class TimelineController extends Controller
     {
         $tweets = $req->user()
         ->tweetsFromFollowing()
+        ->parent()
         ->latest()
         ->with([
             'user',
             'likes',
             'retweets',
+            'replies',
             'media.baseMedia',
             'originalTweet.user',
             'originalTweet.likes',

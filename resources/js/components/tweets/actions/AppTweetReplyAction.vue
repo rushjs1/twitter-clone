@@ -1,19 +1,34 @@
 <template>
     <div>
-        <a href="" class="flex items-center text-base">
+        <a
+            href=""
+            class="flex items-center text-base"
+            @click.prevent="openModal"
+        >
             <icon-comment />
-            <span class="text-gray-600"> 0 </span>
+            <span class="text-gray-600"> {{ tweet.replies_count }} </span>
         </a>
     </div>
 </template>
 
 <script>
+import AppTweetReplyModal from "../../customComponents/modals/AppTweetReplyModal.vue";
 export default {
     name: "AppTweetReplyAction",
     props: {
         tweet: {
             required: true,
             type: Object,
+        },
+    },
+    data() {
+        return {
+            AppTweetReplyModal,
+        };
+    },
+    methods: {
+        openModal() {
+            this.$modal.show(AppTweetReplyModal, { tweet: this.tweet });
         },
     },
 };
