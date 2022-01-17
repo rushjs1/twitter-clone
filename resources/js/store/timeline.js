@@ -50,7 +50,20 @@ export default {
              }
              return t
          })
+     },
+
+     SET_REPLIES(state, {id, count}){
+         state.tweets = state.tweets.map((t) => {
+             if(t.id === id){
+                 t.replies_count = count;
+             }
+             if (get(t.original_tweet, 'id') === id){
+                 t.original_tweet.replies_count = count
+             }
+             return t;
+         })
      }
+     
     },
     actions: {
      async getTweets({commit}, url) {
@@ -66,8 +79,11 @@ export default {
 
      async quoteTweet(_, {tweet,data}){
         await axios.post(`/api/tweets/${tweet.id}/quotes`, data);
+     },
+
+     async replyToTweet(_, {tweet, data})
+     {
+         await axios.post(`/api/tweets/${tweet.id}/replies`, data);
      }
-
-
     }
 }

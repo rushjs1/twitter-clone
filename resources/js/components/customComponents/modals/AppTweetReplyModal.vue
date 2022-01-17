@@ -6,7 +6,11 @@
             :is="`app-tweet-variant-${tweet.type}`"
             :tweet="tweet"
         />
-        <app-tweet-reply-compose v-if="tweet" :tweet="tweet" />
+        <app-tweet-reply-compose
+            v-if="tweet"
+            :tweet="tweet"
+            @success="$emit('close')"
+        />
     </div>
 </template>
 <script>
