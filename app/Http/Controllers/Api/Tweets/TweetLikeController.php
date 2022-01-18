@@ -28,7 +28,10 @@ class TweetLikeController extends Controller
             'tweet_id' => $tweet->id
         ]);
 
-        $tweet->user->notify(new TweetLiked($request->user(), $tweet));
+       // if($request->user()->id !== $tweet->user_id){
+            $tweet->user->notify(new TweetLiked($request->user(), $tweet));
+       // }
+
 
         broadcast(new TweetLikesWereUpdated($request->user(), $tweet));
     }

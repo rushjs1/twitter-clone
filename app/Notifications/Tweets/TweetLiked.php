@@ -6,19 +6,28 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use App\Models\User;
+use App\Models\Tweet;
+use App\Http\Resources\UserResource;
+use App\Http\Resources\TweetResource;
+use App\Notifications\DatabaseNotificationChannel;
 
 class TweetLiked extends Notification
 {
     use Queueable;
+    protected $user;
+    protected $tweet;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(User $user, Tweet $tweet)
     {
-        //
+        $this->user = $user;
+        $this->tweet = $tweet;
+
     }
 
     /**
@@ -29,7 +38,9 @@ class TweetLiked extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return [
+            DatabaseNotificationChannel::class
+        ];
     }
 
 
@@ -42,7 +53,8 @@ class TweetLiked extends Notification
     public function toArray($notifiable)
     {
         return [
-          //
+          'user' => new UserResource($this->user),
+          'tweet' => new TweetResource($this->tweet),
         ];
     }
 }
