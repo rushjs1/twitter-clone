@@ -21,6 +21,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/notifications' , [App\Http\Controllers\Notifications\NotificationController::class, 'index']);
+Route::get('/api/notifications' , [App\Http\Controllers\Notifications\NotificationController::class, 'index']);
 
 
