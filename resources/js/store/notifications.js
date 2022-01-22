@@ -1,6 +1,7 @@
-
+import axios from "axios";
 
 export default {
+    namespaced: true,
     state: {
         notifications: [],
     },
@@ -17,8 +18,10 @@ export default {
         }
     },
     actions: {
-         getNotifications(){
-            console.log('abc');
+       async  getNotifications({commit}, url){
+            let res = await axios.get(url)
+            commit('PUSH_NOTIFICATIONS', res.data.data);
+            return res;
         }
     }
 }

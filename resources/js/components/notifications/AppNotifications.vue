@@ -1,5 +1,15 @@
 <template>
-    <div>Notifications</div>
+    <div>
+        <app-notification
+            v-for="notification in notifications"
+            :key="notification.id"
+            :notification="notification"
+        />
+        <div
+            v-if="notifications.length"
+            v-observe-visibility="{ callback: handleToScrolledNotifications }"
+        ></div>
+    </div>
 </template>
 
 <script>
@@ -14,7 +24,7 @@ export default {
     },
     computed: {
         ...mapGetters("notifications", {
-            tweets: "notifications",
+            notifications: "notifications",
         }),
         urlWithPage() {
             return `api/notifications?page=${this.page}`;
@@ -28,6 +38,11 @@ export default {
             this.getNotifications(this.urlWithPage).then((res) => {
                 this.lastPage = res.data.meta.last_page;
             });
+        },
+        handleToScrolledNotifications(isVisible) {
+            if (!isVisible) {
+                return;
+            }
         },
     },
     mounted() {
