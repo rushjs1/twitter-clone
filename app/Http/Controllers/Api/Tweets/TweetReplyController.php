@@ -8,6 +8,8 @@ use App\Models\Tweet;
 use App\Models\TweetMedia;
 use App\Tweets\TweetType;
 use App\Events\Tweets\TweetRepliesWereUpdated;
+use App\Notifications\Tweets\TweetRepliedTo;
+
 
 class TweetReplyController extends Controller
 {
@@ -22,6 +24,12 @@ class TweetReplyController extends Controller
         {
             $reply->media()->save(TweetMedia::find($id));
         }
+
+       // if($request->user()->id !== $tweet->user_id){
+            $tweet->user->notify(new TweetRepliedTo($request->user(), $tweet));
+       // }
+
+       
 
         broadcast(new TweetRepliesWereUpdated($tweet));
     }
