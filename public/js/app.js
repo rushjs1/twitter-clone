@@ -7531,6 +7531,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _tweets_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tweets/actions */ "./resources/js/store/tweets/actions.js");
+/* harmony import */ var _tweets_mutations__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./tweets/mutations */ "./resources/js/store/tweets/mutations.js");
+/* harmony import */ var _tweets_getters__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./tweets/getters */ "./resources/js/store/tweets/getters.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -7549,42 +7552,59 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   namespaced: true,
   state: {
-    notifications: []
+    notifications: [],
+    tweets: []
   },
-  getters: {
+  getters: _objectSpread(_objectSpread({}, _tweets_getters__WEBPACK_IMPORTED_MODULE_4__["default"]), {}, {
     notifications: function notifications(state) {
       return state.notifications;
+    },
+    getTweetIdsFromNotifications: function getTweetIdsFromNotifications(state) {
+      return state.notifications.map(function (n) {
+        return n.data.tweet.id;
+      });
     }
-  },
-  mutations: {
+  }),
+  mutations: _objectSpread(_objectSpread({}, _tweets_mutations__WEBPACK_IMPORTED_MODULE_3__["default"]), {}, {
     PUSH_NOTIFICATIONS: function PUSH_NOTIFICATIONS(state, data) {
       var _state$notifications;
 
       (_state$notifications = state.notifications).push.apply(_state$notifications, _toConsumableArray(data));
     }
-  },
-  actions: {
+  }),
+  actions: _objectSpread(_objectSpread({}, _tweets_actions__WEBPACK_IMPORTED_MODULE_2__["default"]), {}, {
     getNotifications: function getNotifications(_ref, url) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var commit, res;
+        var commit, dispatch, getters, res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                commit = _ref.commit;
+                commit = _ref.commit, dispatch = _ref.dispatch, getters = _ref.getters;
                 _context.next = 3;
                 return axios__WEBPACK_IMPORTED_MODULE_1___default().get(url);
 
               case 3:
                 res = _context.sent;
                 commit('PUSH_NOTIFICATIONS', res.data.data);
+                console.log(getters.getTweetIdsFromNotifications);
+                dispatch('getTweets', "/api/tweets?ids=".concat(getters.getTweetIdsFromNotifications.join(',')));
                 return _context.abrupt("return", res);
 
-              case 6:
+              case 8:
               case "end":
                 return _context.stop();
             }
@@ -7592,7 +7612,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         }, _callee);
       }))();
     }
-  }
+  })
 });
 
 /***/ }),

@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use App\Events\Tweets\TweetWasCreated;
 use App\Http\Requests\Tweets\TweetStoreRequest;
 use App\Models\TweetMedia;
+use App\Http\Resources\TweetCollection;
+
+use App\Models\Tweet;
 
 class TweetController extends Controller
 {
@@ -15,6 +18,10 @@ class TweetController extends Controller
     public function __construct() 
     {
         $this->middleware(['auth:sanctum'])->only(['store']);
+    }
+
+    public function index(Request $request){
+      return new TweetCollection(Tweet::find(explode(',', $request->ids)));
     }
  
 
