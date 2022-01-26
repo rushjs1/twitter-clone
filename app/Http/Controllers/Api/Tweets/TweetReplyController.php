@@ -15,6 +15,7 @@ class TweetReplyController extends Controller
 {
     public function store(Tweet $tweet, Request $request)
     {
+        
         $reply = $request->user()->tweets()->create(array_merge($request->only('body'), [
             'type' => TweetType::TWEET,
             'parent_id' => $tweet->id
@@ -25,9 +26,10 @@ class TweetReplyController extends Controller
             $reply->media()->save(TweetMedia::find($id));
         }
 
-       // if($request->user()->id !== $tweet->user_id){
-            $tweet->user->notify(new TweetRepliedTo($request->user(), $tweet));
-       // }
+        
+        if($request->user()->id !== $tweet->user_id){
+            $tweet->user->notify(new TweetRepliedTo($request->user(), $reply));
+        }
 
        
 

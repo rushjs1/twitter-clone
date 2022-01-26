@@ -18,7 +18,7 @@ export default {
             return state.notifications
         },
 
-        getTweetIdsFromNotifications(state) {
+        tweetIdsFromNotifications(state) {
 
             return state.notifications.map((n) => n.data.tweet.id);
         }
@@ -36,8 +36,8 @@ export default {
        async  getNotifications({commit, dispatch, getters}, url){
             let res = await axios.get(url)
             commit('PUSH_NOTIFICATIONS', res.data.data);
-            console.log(getters.getTweetIdsFromNotifications);
-            dispatch('getTweets', `/api/tweets?ids=${getters.getTweetIdsFromNotifications.join(',')}`)
+            
+            dispatch('getTweets', `/api/tweets?ids=${getters.tweetIdsFromNotifications.join(',')}`)
             return res;
         }
     }

@@ -6369,12 +6369,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
 //
 //
 //
+//
+//
+//
+//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AppNotificationTweetRepliedTo",
   props: {
@@ -6382,7 +6394,14 @@ __webpack_require__.r(__webpack_exports__);
       required: true,
       type: Object
     }
-  }
+  },
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)("notifications", {
+    tweet: "tweet"
+  })), {}, {
+    resolvedTweet: function resolvedTweet() {
+      return this.tweet(this.notification.data.tweet.id);
+    }
+  })
 });
 
 /***/ }),
@@ -7143,6 +7162,7 @@ Echo.channel('tweets').listen('.TweetLikesWereUpdated', function (e) {
   }
 
   store.commit('timeline/SET_LIKES', e);
+  store.commit('notifications/SET_LIKES', e);
 }).listen('.TweetRetweetsWereUpdated', function (e) {
   console.log(e);
 
@@ -7151,10 +7171,12 @@ Echo.channel('tweets').listen('.TweetLikesWereUpdated', function (e) {
   }
 
   store.commit('timeline/SET_RETWEETS', e);
+  store.commit('notifications/SET_RETWEETS', e);
 }).listen('.TweetWasDeleted', function (e) {
   store.commit('timeline/POP_TWEET', e.id);
 }).listen('.TweetRepliesWereUpdated', function (e) {
   store.commit('timeline/SET_REPLIES', e);
+  store.commit('notifications/SET_REPLIES', e);
 });
 
 /***/ }),
@@ -7572,7 +7594,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     notifications: function notifications(state) {
       return state.notifications;
     },
-    getTweetIdsFromNotifications: function getTweetIdsFromNotifications(state) {
+    tweetIdsFromNotifications: function tweetIdsFromNotifications(state) {
       return state.notifications.map(function (n) {
         return n.data.tweet.id;
       });
@@ -7600,11 +7622,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               case 3:
                 res = _context.sent;
                 commit('PUSH_NOTIFICATIONS', res.data.data);
-                console.log(getters.getTweetIdsFromNotifications);
-                dispatch('getTweets', "/api/tweets?ids=".concat(getters.getTweetIdsFromNotifications.join(',')));
+                dispatch('getTweets', "/api/tweets?ids=".concat(getters.tweetIdsFromNotifications.join(',')));
                 return _context.abrupt("return", res);
 
-              case 8:
+              case 7:
               case "end":
                 return _context.stop();
             }
@@ -7874,6 +7895,13 @@ __webpack_require__.r(__webpack_exports__);
     return state.tweets.sort(function (a, b) {
       return b.created_at - a.created_at;
     });
+  },
+  tweet: function tweet(state) {
+    return function (id) {
+      return state.tweets.find(function (t) {
+        return t.id === id;
+      });
+    };
   }
 });
 
@@ -45153,7 +45181,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "p-4" }, [
+  return _c("div", { staticClass: "p-4 flex-grow" }, [
     _c(
       "div",
       { staticClass: "text-gray-300 mb-4" },
@@ -45196,9 +45224,19 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "p-4" }, [
-    _vm._v("\n    " + _vm._s(_vm.notification.id) + "\n"),
-  ])
+  return _c(
+    "div",
+    { staticClass: "p-4 flex-grow" },
+    [
+      _vm.resolvedTweet
+        ? _c("app-tweet", {
+            staticClass: "!border-0",
+            attrs: { tweet: _vm.resolvedTweet },
+          })
+        : _vm._e(),
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

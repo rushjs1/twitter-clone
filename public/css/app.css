@@ -639,6 +639,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border {
   border-width: 1px;
 }
+.border-0 {
+  border-width: 0px;
+}
+.\!border-0 {
+  border-width: 0px !important;
+}
 .border-t-0 {
   border-top-width: 0px;
 }
