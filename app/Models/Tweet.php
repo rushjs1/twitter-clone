@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Models\Like;
 use App\Models\TweetMedia;
 use App\Models\Entity;
-
+use App\Tweets\Entities\EntityExtractor;
 
 
 use Illuminate\Database\Eloquent\Relationships\HasOne;
@@ -24,6 +24,20 @@ class Tweet extends Model
 
 
     protected $guarded = [];
+
+    public static function boot()
+    {
+        parent::boot();
+        static::created(function(Tweet $tweet){
+
+            dd((new EntityExtractor($tweet->body))->getHastagEntities());;
+
+        });
+
+
+    }
+
+
 
     public function scopeParent(Builder $builder)
     {
