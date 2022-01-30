@@ -1,5 +1,6 @@
 <?php
 namespace App\Tweets\Entities;
+use App\Tweets\Entities\EntityType;
 
 
 class EntityExtractor
@@ -20,7 +21,7 @@ class EntityExtractor
     {
         return $this->buildEntityCollection(
             $this->match(self::HASHTAG_REGEX),
-            'hashtag'
+            EntityType::HASHTAG
         );
     }
 
@@ -29,7 +30,7 @@ class EntityExtractor
     {
         return $this->buildEntityCollection(
             $this->match(self::MENTION_REGEX),
-            'mention'
+            EntityType::MENTION
         );
     }
 
@@ -46,7 +47,7 @@ class EntityExtractor
                 'body_plain' => $entities[1][$index][0],
                 'start' => $start = $entity[1],
                 'end' => $start + strlen($entity[0]),
-                'type' => 'hashtag'
+                'type' =>  $type
                 ];
         }, $entities[0], array_keys($entities[0]));
     }
