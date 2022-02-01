@@ -9,6 +9,7 @@ use App\Models\Like;
 use App\Models\TweetMedia;
 use App\Models\Entity;
 use App\Tweets\Entities\EntityExtractor;
+use App\Tweets\Entities\EntityType;
 
 
 use Illuminate\Database\Eloquent\Relationships\HasOne;
@@ -81,5 +82,11 @@ class Tweet extends Model
     public function entities()
     {
         return $this->hasMany(Entity::class);
+    }
+
+    public function mentions()
+    {
+        return $this->hasMany(Entity::class)->whereType(EntityType::MENTION);
+
     }
 }

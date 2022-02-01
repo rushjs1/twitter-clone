@@ -6567,8 +6567,26 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     body: function body() {
       return {
-        template: "<div> ".concat(this.tweet.body, "</div>")
+        template: "<div> ".concat(this.replaceEntites(this.tweet.body), "</div>")
       };
+    },
+    entities: function entities() {
+      return this.tweet.entities.data.sort(function (a, b) {
+        return b.start - a.start;
+      });
+    }
+  },
+  methods: {
+    replaceEntites: function replaceEntites(body) {
+      var _this = this;
+
+      this.entities.forEach(function (entity) {
+        body = body.substring(0, entity.start) + _this.entityComponent(entity) + body.substring(entity.end, body.length);
+      });
+      return body;
+    },
+    entityComponent: function entityComponent(entity) {
+      return "<app-tweet-".concat(entity.type, "-entity body=\"").concat(entity.body, "\"/>");
     }
   }
 });
@@ -6928,8 +6946,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "AppTweetHashtagEntity"
+  name: "AppTweetHashtagEntity",
+  props: {
+    body: {
+      required: true,
+      type: String
+    }
+  },
+  methods: {
+    getInfo: function getInfo() {
+      console.log(this.body);
+    }
+  }
 });
 
 /***/ }),
@@ -6949,8 +6980,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "AppTweetMentionEntity"
+  name: "AppTweetMentionEntity",
+  props: {
+    body: {
+      required: true,
+      type: String
+    }
+  },
+  methods: {
+    getInfo: function getInfo() {
+      console.log(this.body);
+    }
+  }
 });
 
 /***/ }),
@@ -46006,7 +46050,19 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("span", [_vm._v("Hashtag")])
+  return _c("a", { attrs: { href: "/hashtags/" + _vm.body } }, [
+    _c(
+      "span",
+      {
+        on: {
+          click: function ($event) {
+            return _vm.getInfo()
+          },
+        },
+      },
+      [_vm._v(_vm._s(_vm.body))]
+    ),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -46031,7 +46087,19 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("span", [_vm._v("Mention")])
+  return _c("a", { attrs: { href: "/users/" + _vm.body } }, [
+    _c(
+      "span",
+      {
+        on: {
+          click: function ($event) {
+            return _vm.getInfo()
+          },
+        },
+      },
+      [_vm._v(" " + _vm._s(_vm.body) + " ")]
+    ),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

@@ -24,8 +24,26 @@ export default {
     computed: {
         body() {
             return {
-                template: `<div> ${this.tweet.body}</div>`,
+                template: `<div> ${this.replaceEntites(this.tweet.body)}</div>`,
             };
+        },
+        entities() {
+            return this.tweet.entities.data.sort((a, b) => b.start - a.start);
+        },
+    },
+    methods: {
+        replaceEntites(body) {
+            this.entities.forEach((entity) => {
+                body =
+                    body.substring(0, entity.start) +
+                    this.entityComponent(entity) +
+                    body.substring(entity.end, body.length);
+            });
+
+            return body;
+        },
+        entityComponent(entity) {
+            return `<app-tweet-${entity.type}-entity body="${entity.body}"/>`;
         },
     },
 };
