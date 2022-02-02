@@ -9,6 +9,7 @@ use App\Events\Tweets\TweetWasCreated;
 use App\Http\Requests\Tweets\TweetStoreRequest;
 use App\Models\TweetMedia;
 use App\Http\Resources\TweetCollection;
+use App\Notifications\Tweets\TweetMentionedIn;
 
 use App\Models\Tweet;
 
@@ -36,6 +37,11 @@ class TweetController extends Controller
       
       return new TweetCollection($tweets);
     }
+
+    public function show(Tweet $tweet)
+    {
+      return new TweetResource($tweet);
+    }
  
 
     public function store(TweetStoreRequest $req)
@@ -49,8 +55,15 @@ class TweetController extends Controller
         $tweet->media()->save(TweetMedia::find($id));
       }
 
-      dd($tweet->mentions->users());
-
+      foreach($tweet->mentions->users() as $user){
+        if($req->user()->id !== $user->id){
+          $user->notify(new TweetMentionedIn($req->user(), $tweet));
+        }
+      }
+    
       broadcast(new TweetWasCreated($tweet));
     }
+
+
+
 }

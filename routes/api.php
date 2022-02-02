@@ -3,6 +3,7 @@ Route::get('/timeline', [App\Http\Controllers\Api\Timeline\TimelineController::c
 
 Route::post('/tweets', [App\Http\Controllers\Api\Tweets\TweetController::class, 'store']);
 Route::get('/tweets', [App\Http\Controllers\Api\Tweets\TweetController::class, 'index']);
+Route::get('/tweets/{tweet}', [App\Http\Controllers\Api\Tweets\TweetController::class, 'show']);
 
 Route::post('/tweets/{tweet}/likes', [App\Http\Controllers\Api\Tweets\TweetLikeController::class, 'store']);
 Route::delete('/tweets/{tweet}/likes', [App\Http\Controllers\Api\Tweets\TweetLikeController::class, 'destroy']);

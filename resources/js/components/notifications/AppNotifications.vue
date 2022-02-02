@@ -5,6 +5,7 @@
             :key="notification.id"
             :notification="notification"
         />
+
         <div
             v-if="notifications.length"
             v-observe-visibility="{ callback: handleToScrolledNotifications }"

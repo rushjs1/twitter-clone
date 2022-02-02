@@ -2,6 +2,7 @@
 
 namespace App\Tweets\Entities;
 use Illuminate\Database\Eloquent\Collection;
+use App\Models\User;
 
 
 class EntityDatabaseCollection extends Collection 
@@ -9,6 +10,6 @@ class EntityDatabaseCollection extends Collection
 
     public function users()
     {
-        return ['a','b','c'];
+        return User::whereIn('username', $this->pluck('body_plain'))->get();
     }
 }
