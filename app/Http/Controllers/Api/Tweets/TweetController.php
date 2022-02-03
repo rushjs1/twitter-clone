@@ -10,6 +10,7 @@ use App\Http\Requests\Tweets\TweetStoreRequest;
 use App\Models\TweetMedia;
 use App\Http\Resources\TweetCollection;
 use App\Notifications\Tweets\TweetMentionedIn;
+use App\Http\Resources\TweetResource;
 
 use App\Models\Tweet;
 
@@ -40,7 +41,7 @@ class TweetController extends Controller
 
     public function show(Tweet $tweet)
     {
-      return new TweetResource($tweet);
+      return new TweetCollection(collect([$tweet])->merge($tweet->parents()));
     }
  
 
