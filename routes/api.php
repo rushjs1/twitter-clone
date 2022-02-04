@@ -17,3 +17,4 @@ Route::post('/media', [App\Http\Controllers\Api\Media\MediaController::class, 's
 Route::get('/media/types', [App\Http\Controllers\Api\Media\MediaTypesController::class, 'index']);
 
 Route::post('/tweets/{tweet}/replies', [App\Http\Controllers\Api\Tweets\TweetReplyController::class, 'store']);
+Route::get('/tweets/{tweet}/replies', [App\Http\Controllers\Api\Tweets\TweetReplyController::class, 'show']);

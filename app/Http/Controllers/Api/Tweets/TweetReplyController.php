@@ -9,10 +9,24 @@ use App\Models\TweetMedia;
 use App\Tweets\TweetType;
 use App\Events\Tweets\TweetRepliesWereUpdated;
 use App\Notifications\Tweets\TweetRepliedTo;
+use App\Http\Resources\TweetCollection;
 
 
 class TweetReplyController extends Controller
 {
+ 
+    public function __construct()
+    {
+        $this->middleware(['auth:sanctum'])->only('store');
+    } 
+
+    public function show(Tweet $tweet)
+    {
+        return new TweetCollection($tweet->replies);
+    }
+
+
+
     public function store(Tweet $tweet, Request $request)
     {
         
@@ -30,8 +44,6 @@ class TweetReplyController extends Controller
         if($request->user()->id !== $tweet->user_id){
             $tweet->user->notify(new TweetRepliedTo($request->user(), $reply));
         }
-
-       
 
         broadcast(new TweetRepliesWereUpdated($tweet));
     }
