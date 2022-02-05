@@ -5928,10 +5928,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AppConversation",
   props: {
@@ -5940,8 +5958,17 @@ __webpack_require__.r(__webpack_exports__);
       type: String
     }
   },
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)("conversation", {
+    tweet: "tweet",
+    parents: "parents",
+    replies: "replies"
+  })),
+  methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)("conversation", {
+    getTweets: "getTweets"
+  })),
   mounted: function mounted() {
-    console.log(this.id);
+    this.getTweets("/api/tweets/".concat(this.id));
+    this.getTweets("/api/tweets/".concat(this.id, "/replies"));
   }
 });
 
@@ -7289,6 +7316,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store_likes__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./store/likes */ "./resources/js/store/likes.js");
 /* harmony import */ var _store_retweets__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./store/retweets */ "./resources/js/store/retweets.js");
 /* harmony import */ var _store_notifications__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./store/notifications */ "./resources/js/store/notifications.js");
+/* harmony import */ var _store_conversation__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./store/conversation */ "./resources/js/store/conversation.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -7332,6 +7360,7 @@ files.keys().map(function (key) {
 
 
 
+
  //import Echo from 'laravel-echo';
 
 var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
@@ -7339,7 +7368,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     timeline: _store_timeline__WEBPACK_IMPORTED_MODULE_4__["default"],
     likes: _store_likes__WEBPACK_IMPORTED_MODULE_5__["default"],
     retweets: _store_retweets__WEBPACK_IMPORTED_MODULE_6__["default"],
-    notifications: _store_notifications__WEBPACK_IMPORTED_MODULE_7__["default"]
+    notifications: _store_notifications__WEBPACK_IMPORTED_MODULE_7__["default"],
+    conversation: _store_conversation__WEBPACK_IMPORTED_MODULE_8__["default"]
   }
 });
 /**
@@ -7619,6 +7649,60 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   mounted: function mounted() {
     this.getMediaTypes();
   }
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/conversation.js":
+/*!********************************************!*\
+  !*** ./resources/js/store/conversation.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _tweets_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tweets/actions */ "./resources/js/store/tweets/actions.js");
+/* harmony import */ var _tweets_mutations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tweets/mutations */ "./resources/js/store/tweets/mutations.js");
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  namespaced: true,
+  state: {
+    tweets: []
+  },
+  getters: {
+    // tweet: (state) => { return state.tweets.filter(t => t.id == id)}
+    tweet: function tweet(state) {
+      return function (id) {
+        return state.tweets.find(function (t) {
+          return t.id == id;
+        });
+      };
+    },
+    parents: function parents(state) {
+      return function (id) {
+        return state.tweets.filter(function (t) {
+          return t.id != id;
+        }).sort(function (a, b) {
+          return a.created_at - b.created_at;
+        });
+      };
+    },
+    replies: function replies(state) {
+      return function (id) {
+        return state.tweets.filter(function (t) {
+          return t.parent_id == id;
+        }).sort(function (a, b) {
+          return a.created_at - b.created_at;
+        });
+      };
+    }
+  },
+  mutations: _tweets_mutations__WEBPACK_IMPORTED_MODULE_1__["default"],
+  actions: _tweets_actions__WEBPACK_IMPORTED_MODULE_0__["default"]
 });
 
 /***/ }),
@@ -45265,7 +45349,34 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("convo")])
+  return _c("div", [
+    _c(
+      "div",
+      _vm._l(_vm.parents(_vm.id), function (t) {
+        return _c("app-tweet", { key: t.id, attrs: { tweet: t } })
+      }),
+      1
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "text-lg border-b-8 border-t-8 border-gray-800" },
+      [
+        _vm.tweet(_vm.id)
+          ? _c("app-tweet", { attrs: { tweet: _vm.tweet(_vm.id) } })
+          : _vm._e(),
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      _vm._l(_vm.replies(_vm.id), function (t) {
+        return _c("app-tweet", { key: t.id, attrs: { tweet: t } })
+      }),
+      1
+    ),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

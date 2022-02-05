@@ -44,6 +44,7 @@ import timeline from './store/timeline';
 import likes from './store/likes';
 import retweets from './store/retweets';
 import notifications from './store/notifications';
+import conversation from './store/conversation';
 
 import Vue from 'vue';
 //import Echo from 'laravel-echo';
@@ -53,7 +54,8 @@ const store = new Vuex.Store({
         timeline,
         likes,
         retweets,
-        notifications
+        notifications,
+        conversation
     }
 })
 
