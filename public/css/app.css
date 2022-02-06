@@ -636,14 +636,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border-t {
   border-top-width: 1px;
 }
-.border-b {
-  border-bottom-width: 1px;
-}
 .border-b-8 {
   border-bottom-width: 8px;
 }
 .border-t-8 {
   border-top-width: 8px;
+}
+.border-b {
+  border-bottom-width: 1px;
 }
 .border-gray-800 {
   --tw-border-opacity: 1;

@@ -7389,6 +7389,7 @@ Echo.channel('tweets').listen('.TweetLikesWereUpdated', function (e) {
 
   store.commit('timeline/SET_LIKES', e);
   store.commit('notifications/SET_LIKES', e);
+  store.commit('conversation/SET_LIKES', e);
 }).listen('.TweetRetweetsWereUpdated', function (e) {
   console.log(e);
 
@@ -7398,11 +7399,13 @@ Echo.channel('tweets').listen('.TweetLikesWereUpdated', function (e) {
 
   store.commit('timeline/SET_RETWEETS', e);
   store.commit('notifications/SET_RETWEETS', e);
+  store.commit('conversation/SET_RETWEETS', e);
 }).listen('.TweetWasDeleted', function (e) {
   store.commit('timeline/POP_TWEET', e.id);
 }).listen('.TweetRepliesWereUpdated', function (e) {
   store.commit('timeline/SET_REPLIES', e);
   store.commit('notifications/SET_REPLIES', e);
+  store.commit('conversation/SET_REPLIES', e);
 });
 
 /***/ }),
@@ -7685,7 +7688,7 @@ __webpack_require__.r(__webpack_exports__);
     parents: function parents(state) {
       return function (id) {
         return state.tweets.filter(function (t) {
-          return t.id != id;
+          return t.id != id && !t.parent_ids.includes(parseInt(id));
         }).sort(function (a, b) {
           return a.created_at - b.created_at;
         });
