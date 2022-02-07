@@ -503,12 +503,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .mb-2 {
   margin-bottom: 0.5rem;
 }
-.mb-10 {
-  margin-bottom: 2.5rem;
-}
-.mt-5 {
-  margin-top: 1.25rem;
-}
 .block {
   display: block;
 }
@@ -636,9 +630,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .\!border-0 {
   border-width: 0px !important;
 }
-.border-2 {
-  border-width: 2px;
-}
 .border-t-0 {
   border-top-width: 0px;
 }
@@ -654,11 +645,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border-t-8 {
   border-top-width: 8px;
 }
-.border-b {
-  border-bottom-width: 1px;
-}
 .border-l-2 {
   border-left-width: 2px;
+}
+.border-b {
+  border-bottom-width: 1px;
 }
 .border-gray-800 {
   --tw-border-opacity: 1;
@@ -861,10 +852,6 @@ a {
 .hover\:bg-gray-800:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(31 41 55 / var(--tw-bg-opacity));
-}
-
-.hover\:bg-red-600\/70:hover {
-  background-color: rgb(220 38 38 / 0.7);
 }
 
 @media (prefers-color-scheme: dark) {

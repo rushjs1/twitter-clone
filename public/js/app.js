@@ -47016,7 +47016,7 @@ var render = function () {
     _c(
       "div",
       {
-        staticClass: "flex items-center text-base rounded-lg",
+        staticClass: "flex items-center text-base cursor-pointer",
         on: {
           click: function ($event) {
             $event.preventDefault()
