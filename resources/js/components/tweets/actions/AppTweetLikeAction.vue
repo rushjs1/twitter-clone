@@ -1,7 +1,7 @@
 <template>
     <div>
         <div
-            class="flex items-center text-base hover:bg-red-600/70 rounded-lg"
+            class="flex items-center text-base rounded-lg"
             @click.prevent="likeOrUnlike"
         >
             <icon-heart :liked="liked" />

@@ -9,6 +9,7 @@
             v-for="tweet in tweets"
             :key="tweet.id"
             :tweet="tweet"
+            @click="goConversation(tweet)"
         />
 
         <div
@@ -62,6 +63,10 @@ export default {
             this.getTweets(this.urlWithPage).then((res) => {
                 this.lastPage = res.data.meta.last_page;
             });
+        },
+        goConversation(tweet) {
+            console.log("hello");
+            console.log("go To conversation view for tweet " + tweet.id);
         },
     },
     mounted() {
