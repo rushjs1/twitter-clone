@@ -1,7 +1,11 @@
 <template>
     <div>
         <div class="flex w-full">
-            <img :src="tweet.user.avatar" class="w-12 h-12 mr-3 rounded-full" />
+            <img
+                :src="tweet.user.avatar"
+                class="w-12 h-12 mr-3 rounded-full"
+                @click="goConvo"
+            />
             <div class="flex-grow">
                 <app-tweet-username :user="tweet.user" />
 
@@ -78,6 +82,13 @@ export default {
             return (
                 Object.entries(this.tweet.media.data).length > 0 &&
                 this.tweet.media.data[0].type === "video"
+            );
+        },
+    },
+    methods: {
+        goConvo() {
+            window.location.replace(
+                `http://twitter.test/tweets/${this.tweet.id}`
             );
         },
     },

@@ -1,5 +1,5 @@
 <template>
-    <div class="nav border-l-2 border-gray-800 text-lg text-gray-500">
+    <div class="nav text-lg text-gray-500">
         <div class="mt-4 mb-4 cursor-pointer" @click="goHome">
             <icon-twitter />
         </div>

@@ -6792,7 +6792,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AppTweet",
   props: {
@@ -7427,6 +7426,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -7481,6 +7484,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     hasVideo: function hasVideo() {
       return Object.entries(this.tweet.media.data).length > 0 && this.tweet.media.data[0].type === "video";
+    }
+  },
+  methods: {
+    goConvo: function goConvo() {
+      window.location.replace("http://twitter.test/tweets/".concat(this.tweet.id));
     }
   },
   mounted: function mounted() {
@@ -46525,45 +46533,41 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "nav border-l-2 border-gray-800 text-lg text-gray-500" },
-    [
-      _c(
-        "div",
-        { staticClass: "mt-4 mb-4 cursor-pointer", on: { click: _vm.goHome } },
-        [_c("icon-twitter")],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "mb-4 flex flex-row cursor-pointer",
-          on: { click: _vm.goHome },
-        },
-        [_c("icon-home"), _vm._v(" Home\n    ")],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "mb-4 flex flex-row cursor-pointer",
-          on: { click: _vm.goNotifications },
-        },
-        [_c("icon-bell"), _vm._v(" Notifications\n    ")],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "mb-4 flex flex-row cursor-pointer" },
-        [_c("icon-user"), _vm._v(" Profile\n    ")],
-        1
-      ),
-    ]
-  )
+  return _c("div", { staticClass: "nav text-lg text-gray-500" }, [
+    _c(
+      "div",
+      { staticClass: "mt-4 mb-4 cursor-pointer", on: { click: _vm.goHome } },
+      [_c("icon-twitter")],
+      1
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "mb-4 flex flex-row cursor-pointer",
+        on: { click: _vm.goHome },
+      },
+      [_c("icon-home"), _vm._v(" Home\n    ")],
+      1
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "mb-4 flex flex-row cursor-pointer",
+        on: { click: _vm.goNotifications },
+      },
+      [_c("icon-bell"), _vm._v(" Notifications\n    ")],
+      1
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "mb-4 flex flex-row cursor-pointer" },
+      [_c("icon-user"), _vm._v(" Profile\n    ")],
+      1
+    ),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -46865,7 +46869,6 @@ var render = function () {
     {
       staticClass:
         "w-full inline-block p-4 border-b border-gray-800 hover:bg-gray-800",
-      on: { click: _vm.goConversation },
     },
     [
       _c("app-tweet-variant-" + _vm.tweet.type, {
@@ -47027,7 +47030,7 @@ var render = function () {
       [
         _c("icon-heart", { attrs: { liked: _vm.liked } }),
         _vm._v(" "),
-        _c("span", { staticClass: "text-gray-600" }, [
+        _c("span", { class: _vm.liked ? "text-red-500" : "text-gray-600" }, [
           _vm._v(
             "\n            " + _vm._s(_vm.tweet.likes_count) + "\n        "
           ),
@@ -47427,6 +47430,7 @@ var render = function () {
       _c("img", {
         staticClass: "w-12 h-12 mr-3 rounded-full",
         attrs: { src: _vm.tweet.user.avatar },
+        on: { click: _vm.goConvo },
       }),
       _vm._v(" "),
       _c(
