@@ -5,8 +5,14 @@
             class="flex items-center text-base"
             @click.prevent="openModal"
         >
-            <icon-comment />
-            <span class="text-gray-600"> {{ tweet.replies_count }} </span>
+            <icon-comment :count="tweet.replies_count" />
+            <span
+                :class="
+                    tweet.replies_count > 0 ? 'text-blue-600' : 'text-gray-600'
+                "
+            >
+                {{ tweet.replies_count }}
+            </span>
         </a>
     </div>
 </template>

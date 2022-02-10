@@ -6186,8 +6186,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "IconComment"
+  name: "IconComment",
+  props: {
+    count: {
+      required: false,
+      type: Number
+    }
+  }
 });
 
 /***/ }),
@@ -7021,6 +7031,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _customComponents_modals_AppTweetReplyModal_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../customComponents/modals/AppTweetReplyModal.vue */ "./resources/js/components/customComponents/modals/AppTweetReplyModal.vue");
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -46215,7 +46231,10 @@ var render = function () {
     _c(
       "svg",
       {
-        staticClass: "fill-current text-gray-600 w-5 mr-2",
+        class:
+          _vm.count > 1
+            ? "fill-current text-blue-600 w-5 mr-2"
+            : "fill-current text-gray-600 w-5 mr-2",
         attrs: {
           xmlns: "http://www.w3.org/2000/svg",
           viewBox: "0 0 24 24",
@@ -47077,11 +47096,20 @@ var render = function () {
         },
       },
       [
-        _c("icon-comment"),
+        _c("icon-comment", { attrs: { count: _vm.tweet.replies_count } }),
         _vm._v(" "),
-        _c("span", { staticClass: "text-gray-600" }, [
-          _vm._v(" " + _vm._s(_vm.tweet.replies_count) + " "),
-        ]),
+        _c(
+          "span",
+          {
+            class:
+              _vm.tweet.replies_count > 0 ? "text-blue-600" : "text-gray-600",
+          },
+          [
+            _vm._v(
+              "\n            " + _vm._s(_vm.tweet.replies_count) + "\n        "
+            ),
+          ]
+        ),
       ],
       1
     ),
