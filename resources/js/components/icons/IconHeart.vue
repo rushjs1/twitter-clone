@@ -8,7 +8,7 @@
             :class="
                 liked
                     ? 'fill-current text-red-600 w-5 mr-2 hover:cursor-pointer'
-                    : 'fill-current text-gray-600 w-5 mr-2'
+                    : 'fill-current text-gray-600 w-5 mr-2 rounded-md hover:text-red-600 '
             "
         >
             <path

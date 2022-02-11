@@ -6984,6 +6984,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AppTweetLikeAction",
@@ -46281,7 +46285,7 @@ var render = function () {
       {
         class: _vm.liked
           ? "fill-current text-red-600 w-5 mr-2 hover:cursor-pointer"
-          : "fill-current text-gray-600 w-5 mr-2",
+          : "fill-current text-gray-600 w-5 mr-2 rounded-md hover:text-red-600 ",
         attrs: {
           xmlns: "http://www.w3.org/2000/svg",
           viewBox: "0 0 24 24",
@@ -47049,11 +47053,19 @@ var render = function () {
       [
         _c("icon-heart", { attrs: { liked: _vm.liked } }),
         _vm._v(" "),
-        _c("span", { class: _vm.liked ? "text-red-500" : "text-gray-600" }, [
-          _vm._v(
-            "\n            " + _vm._s(_vm.tweet.likes_count) + "\n        "
-          ),
-        ]),
+        _c(
+          "span",
+          {
+            class: _vm.liked
+              ? "text-red-500"
+              : "text-gray-600 hover:text-red-600",
+          },
+          [
+            _vm._v(
+              "\n            " + _vm._s(_vm.tweet.likes_count) + "\n        "
+            ),
+          ]
+        ),
       ],
       1
     ),

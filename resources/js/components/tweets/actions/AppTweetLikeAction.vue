@@ -5,7 +5,11 @@
             @click.prevent="likeOrUnlike"
         >
             <icon-heart :liked="liked" />
-            <span :class="liked ? 'text-red-500' : 'text-gray-600'">
+            <span
+                :class="
+                    liked ? 'text-red-500' : 'text-gray-600 hover:text-red-600'
+                "
+            >
                 {{ tweet.likes_count }}
             </span>
         </div>
