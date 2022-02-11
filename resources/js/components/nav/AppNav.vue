@@ -9,7 +9,7 @@
         <div class="mb-4 flex flex-row cursor-pointer" @click="goNotifications">
             <icon-bell /> Notifications
         </div>
-        <div class="mb-4 flex flex-row cursor-pointer">
+        <div class="mb-4 flex flex-row cursor-pointer" @click="goProfile">
             <icon-user /> Profile
         </div>
     </div>
@@ -23,6 +23,9 @@ export default {
         },
         goNotifications() {
             window.location.replace("http://twitter.test/notifications");
+        },
+        goProfile() {
+            window.location.replace("http://twitter.test/profile");
         },
     },
 };
