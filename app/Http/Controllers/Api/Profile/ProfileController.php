@@ -27,7 +27,7 @@ class ProfileController extends Controller
             'originalTweet.retweets',
             'originalTweet.media.baseMedia'
           ])->paginate(6); 
-
-         return new TweetCollection($tweets);
+      
+         return new TweetCollection($tweets, $req->user);
     }
 }

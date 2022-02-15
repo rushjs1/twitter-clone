@@ -7,20 +7,23 @@ export default {
     namespaced: true,
     state: {
         tweets: [],
-        user: {}
+        user: []
     },
-    getters,
+    getters: {
+        ...getters,
+        user: (state) => state.user
+    },
     mutations:{ 
         ...mutations,
-        setUser(data){
-            console.log(data);
-        
+        setUser(state, data){
+            state.user = data 
         }
     },
     actions: {
         ...actions,
-        getUser({commit}, data){
-            commit('setUser', data)
+       async getUser({commit}, id){
+            var res = await axios.get(`/api/user?id=${id}`)
+            commit('setUser', res.data.data)
         }
     }
 }

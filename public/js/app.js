@@ -6159,6 +6159,40 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/icons/IconCalendar.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/icons/IconCalendar.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "IconCalendar"
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/icons/IconComment.vue?vue&type=script&lang=js&":
 /*!************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/icons/IconComment.vue?vue&type=script&lang=js& ***!
@@ -6700,7 +6734,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _icons_IconCalendar_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../icons/IconCalendar.vue */ "./resources/js/components/icons/IconCalendar.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -6733,8 +6768,44 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    IconCalendar: _icons_IconCalendar_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
   name: "AppProfile",
   data: function data() {
     return {
@@ -6742,14 +6813,79 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       lastPage: 1
     };
   },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)("profile", {
-    tweets: "tweets"
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)("profile", {
+    tweets: "tweets",
+    user: "user"
   })), {}, {
     urlWithPage: function urlWithPage() {
       return "api/profile?page=".concat(this.page);
+    },
+    joinedInMonth: function joinedInMonth() {
+      if (this.user) {
+        var usr = this.user.joined.split("-").slice(0, 2)[1];
+
+        switch (usr) {
+          case "1":
+            return "January";
+            break;
+
+          case "2":
+            return "Febuary";
+            break;
+
+          case "3":
+            return "March";
+            break;
+
+          case "4":
+            return "April";
+            break;
+
+          case "5":
+            return "May";
+            break;
+
+          case "6":
+            return "June";
+            break;
+
+          case "7":
+            return "July";
+            break;
+
+          case "8":
+            return "August";
+            break;
+
+          case "9":
+            return "September";
+            break;
+
+          case "10":
+            return "October";
+            break;
+
+          case "11":
+            return "November";
+            break;
+
+          case "12":
+            return "December";
+            break;
+        }
+      } else {
+        return "";
+      }
+    },
+    joinedInYear: function joinedInYear() {
+      if (this.user) {
+        return this.user.joined.split("-").slice(0, 2)[0];
+      } else {
+        return "";
+      }
     }
   }),
-  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)("profile", {
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapActions)("profile", {
     getTweets: "getTweets",
     getUser: "getUser"
   })), {}, {
@@ -6763,9 +6899,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               case 0:
                 console.log("get profile tweets and info");
 
-                _this.getTweets(_this.urlWithPage).then(function (res) {//console.log(res.data.data);
-                })["finally"](function () {
-                  _this.getUser();
+                _this.getTweets(_this.urlWithPage).then(function (res) {
+                  _this.getUser(window.User.id);
                 });
 
               case 2:
@@ -8266,13 +8401,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _tweets_getters__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tweets/getters */ "./resources/js/store/tweets/getters.js");
-/* harmony import */ var _tweets_mutations__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./tweets/mutations */ "./resources/js/store/tweets/mutations.js");
-/* harmony import */ var _tweets_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./tweets/actions */ "./resources/js/store/tweets/actions.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _tweets_getters__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./tweets/getters */ "./resources/js/store/tweets/getters.js");
+/* harmony import */ var _tweets_mutations__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./tweets/mutations */ "./resources/js/store/tweets/mutations.js");
+/* harmony import */ var _tweets_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./tweets/actions */ "./resources/js/store/tweets/actions.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -8288,18 +8431,41 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   namespaced: true,
   state: {
     tweets: [],
-    user: {}
+    user: []
   },
-  getters: _tweets_getters__WEBPACK_IMPORTED_MODULE_2__["default"],
-  mutations: _objectSpread(_objectSpread({}, _tweets_mutations__WEBPACK_IMPORTED_MODULE_3__["default"]), {}, {
-    setUser: function setUser(data) {
-      console.log(data);
+  getters: _objectSpread(_objectSpread({}, _tweets_getters__WEBPACK_IMPORTED_MODULE_3__["default"]), {}, {
+    user: function user(state) {
+      return state.user;
     }
   }),
-  actions: _objectSpread(_objectSpread({}, _tweets_actions__WEBPACK_IMPORTED_MODULE_4__["default"]), {}, {
-    getUser: function getUser(_ref, data) {
-      var commit = _ref.commit;
-      commit('setUser', data);
+  mutations: _objectSpread(_objectSpread({}, _tweets_mutations__WEBPACK_IMPORTED_MODULE_4__["default"]), {}, {
+    setUser: function setUser(state, data) {
+      state.user = data;
+    }
+  }),
+  actions: _objectSpread(_objectSpread({}, _tweets_actions__WEBPACK_IMPORTED_MODULE_5__["default"]), {}, {
+    getUser: function getUser(_ref, id) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var commit, res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                commit = _ref.commit;
+                _context.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().get("/api/user?id=".concat(id));
+
+              case 3:
+                res = _context.sent;
+                commit('setUser', res.data.data);
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
     }
   })
 });
@@ -42980,6 +43146,45 @@ component.options.__file = "resources/js/components/icons/IconBell.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/icons/IconCalendar.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/components/icons/IconCalendar.vue ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _IconCalendar_vue_vue_type_template_id_6cc3d152___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./IconCalendar.vue?vue&type=template&id=6cc3d152& */ "./resources/js/components/icons/IconCalendar.vue?vue&type=template&id=6cc3d152&");
+/* harmony import */ var _IconCalendar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./IconCalendar.vue?vue&type=script&lang=js& */ "./resources/js/components/icons/IconCalendar.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _IconCalendar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _IconCalendar_vue_vue_type_template_id_6cc3d152___WEBPACK_IMPORTED_MODULE_0__.render,
+  _IconCalendar_vue_vue_type_template_id_6cc3d152___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/icons/IconCalendar.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/icons/IconComment.vue":
 /*!*******************************************************!*\
   !*** ./resources/js/components/icons/IconComment.vue ***!
@@ -44312,6 +44517,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/icons/IconCalendar.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/icons/IconCalendar.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_IconCalendar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./IconCalendar.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/icons/IconCalendar.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_IconCalendar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/icons/IconComment.vue?vue&type=script&lang=js&":
 /*!********************************************************************************!*\
   !*** ./resources/js/components/icons/IconComment.vue?vue&type=script&lang=js& ***!
@@ -45011,6 +45232,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_IconBell_vue_vue_type_template_id_023b2f1c___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_IconBell_vue_vue_type_template_id_023b2f1c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./IconBell.vue?vue&type=template&id=023b2f1c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/icons/IconBell.vue?vue&type=template&id=023b2f1c&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/icons/IconCalendar.vue?vue&type=template&id=6cc3d152&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/icons/IconCalendar.vue?vue&type=template&id=6cc3d152& ***!
+  \***************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_IconCalendar_vue_vue_type_template_id_6cc3d152___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_IconCalendar_vue_vue_type_template_id_6cc3d152___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_IconCalendar_vue_vue_type_template_id_6cc3d152___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./IconCalendar.vue?vue&type=template&id=6cc3d152& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/icons/IconCalendar.vue?vue&type=template&id=6cc3d152&");
 
 
 /***/ }),
@@ -46454,6 +46692,52 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/icons/IconCalendar.vue?vue&type=template&id=6cc3d152&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/icons/IconCalendar.vue?vue&type=template&id=6cc3d152& ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "svg",
+      {
+        staticClass: "fill-current text-gray-600 mr-1",
+        attrs: {
+          xmlns: "http://www.w3.org/2000/svg",
+          viewBox: "0 0 24 24",
+          width: "24",
+          height: "24",
+        },
+      },
+      [
+        _c("path", {
+          staticClass: "heroicon-ui",
+          attrs: {
+            d: "M17 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6c0-1.1.9-2 2-2h2V3a1 1 0 1 1 2 0v1h6V3a1 1 0 0 1 2 0v1zm-2 2H9v1a1 1 0 1 1-2 0V6H5v4h14V6h-2v1a1 1 0 0 1-2 0V6zm4 6H5v8h14v-8z",
+          },
+        }),
+      ]
+    ),
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/icons/IconComment.vue?vue&type=template&id=10e28cd6&":
 /*!*****************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/icons/IconComment.vue?vue&type=template&id=10e28cd6& ***!
@@ -47065,9 +47349,56 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "text-gray-300" }, [
-      _vm._v("Profile information"),
-    ]),
+    _c(
+      "div",
+      {
+        staticClass:
+          "w-full inline-block p-4 border-b border-gray-800 text-gray-300",
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "w-full inline-block h-12 border border-gray-400" },
+          [_vm._v("\n            Banner image here\n        ")]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "flex justify-between mt-4" }, [
+          _c("div", [
+            _c("img", {
+              staticClass: "w-12 h-12 mr-3 rounded-full",
+              attrs: { src: _vm.user.avatar },
+            }),
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "bg-gray-500 rounded-lg text-gray-100 p-2 text-xs h-8",
+            },
+            [_vm._v("\n                Edit Profile\n            ")]
+          ),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "text-gray-400 mt-4" }, [
+          _vm._v("\n            " + _vm._s(_vm.user.name) + "\n        "),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "text-gray-400 mt-4 flex" }, [
+          _c("div", [_c("icon-calendar")], 1),
+          _vm._v(" "),
+          _c("div", [
+            _vm._v(
+              "\n                Joined in\n                " +
+                _vm._s(_vm.joinedInMonth) +
+                "\n                " +
+                _vm._s(_vm.joinedInYear) +
+                "\n            "
+            ),
+          ]),
+        ]),
+      ]
+    ),
     _vm._v(" "),
     _c(
       "div",
@@ -61596,6 +61927,7 @@ var map = {
 	"./components/dropdown/AppDropdown.vue": "./resources/js/components/dropdown/AppDropdown.vue",
 	"./components/dropdown/AppDropdownItem.vue": "./resources/js/components/dropdown/AppDropdownItem.vue",
 	"./components/icons/IconBell.vue": "./resources/js/components/icons/IconBell.vue",
+	"./components/icons/IconCalendar.vue": "./resources/js/components/icons/IconCalendar.vue",
 	"./components/icons/IconComment.vue": "./resources/js/components/icons/IconComment.vue",
 	"./components/icons/IconHeart.vue": "./resources/js/components/icons/IconHeart.vue",
 	"./components/icons/IconHome.vue": "./resources/js/components/icons/IconHome.vue",
