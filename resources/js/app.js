@@ -45,6 +45,7 @@ import likes from './store/likes';
 import retweets from './store/retweets';
 import notifications from './store/notifications';
 import conversation from './store/conversation';
+import profile from './store/profile';
 
 import Vue from 'vue';
 //import Echo from 'laravel-echo';
@@ -55,7 +56,8 @@ const store = new Vuex.Store({
         likes,
         retweets,
         notifications,
-        conversation
+        conversation,
+        profile
     }
 })
 

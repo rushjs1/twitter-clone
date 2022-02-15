@@ -22,8 +22,6 @@ class NotificationController extends Controller
         ->notifications()
         ->paginate(5);
         
-        
-
         return new NotificationCollection($notifications);
     }
 }

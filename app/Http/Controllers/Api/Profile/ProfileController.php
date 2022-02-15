@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Api\Profile;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Tweet;
+use App\Http\Resources\TweetCollection;
+use App\Http\Resources\TweetResource;
+use App\Models\TweetMedia; 
 
 class ProfileController extends Controller
 {
@@ -13,7 +16,7 @@ class ProfileController extends Controller
     public function index(Request $req)
     {
         
-         $tweets = Tweet::with([
+         $tweets = $req->user()->tweets()->with([
             'user',
             'likes',
             'retweets',
@@ -22,9 +25,9 @@ class ProfileController extends Controller
             'originalTweet.user',
             'originalTweet.likes',
             'originalTweet.retweets',
-            'originalTweets.media.baseMedia'
-          ])->where('user_id', $req->user()->id); 
+            'originalTweet.media.baseMedia'
+          ])->paginate(6); 
 
-          dd($tweets);
+         return new TweetCollection($tweets);
     }
 }

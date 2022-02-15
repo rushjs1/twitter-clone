@@ -6698,12 +6698,101 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "AppProfile"
+  name: "AppProfile",
+  data: function data() {
+    return {
+      page: 1,
+      lastPage: 1
+    };
+  },
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)("profile", {
+    tweets: "tweets"
+  })), {}, {
+    urlWithPage: function urlWithPage() {
+      return "api/profile?page=".concat(this.page);
+    }
+  }),
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)("profile", {
+    getTweets: "getTweets",
+    getUser: "getUser"
+  })), {}, {
+    loadTweets: function loadTweets() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                console.log("get profile tweets and info");
+
+                _this.getTweets(_this.urlWithPage).then(function (res) {//console.log(res.data.data);
+                })["finally"](function () {
+                  _this.getUser();
+                });
+
+              case 2:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    handleToScrolledProfile: function handleToScrolledProfile(isVisible) {
+      if (!isVisible) {
+        return;
+      }
+
+      if (this.lastPage === this.page) {
+        return;
+      }
+
+      console.log("at bottom");
+      this.page++;
+      this.loadTweets;
+    }
+  }),
+  mounted: function mounted() {
+    this.loadTweets();
+  }
 });
 
 /***/ }),
@@ -7559,6 +7648,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store_retweets__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./store/retweets */ "./resources/js/store/retweets.js");
 /* harmony import */ var _store_notifications__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./store/notifications */ "./resources/js/store/notifications.js");
 /* harmony import */ var _store_conversation__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./store/conversation */ "./resources/js/store/conversation.js");
+/* harmony import */ var _store_profile__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./store/profile */ "./resources/js/store/profile.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -7603,6 +7693,7 @@ files.keys().map(function (key) {
 
 
 
+
  //import Echo from 'laravel-echo';
 
 var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
@@ -7611,7 +7702,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     likes: _store_likes__WEBPACK_IMPORTED_MODULE_5__["default"],
     retweets: _store_retweets__WEBPACK_IMPORTED_MODULE_6__["default"],
     notifications: _store_notifications__WEBPACK_IMPORTED_MODULE_7__["default"],
-    conversation: _store_conversation__WEBPACK_IMPORTED_MODULE_8__["default"]
+    conversation: _store_conversation__WEBPACK_IMPORTED_MODULE_8__["default"],
+    profile: _store_profile__WEBPACK_IMPORTED_MODULE_9__["default"]
   }
 });
 /**
@@ -8157,6 +8249,57 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           }
         }, _callee);
       }))();
+    }
+  })
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/profile.js":
+/*!***************************************!*\
+  !*** ./resources/js/store/profile.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _tweets_getters__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tweets/getters */ "./resources/js/store/tweets/getters.js");
+/* harmony import */ var _tweets_mutations__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./tweets/mutations */ "./resources/js/store/tweets/mutations.js");
+/* harmony import */ var _tweets_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./tweets/actions */ "./resources/js/store/tweets/actions.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  namespaced: true,
+  state: {
+    tweets: [],
+    user: {}
+  },
+  getters: _tweets_getters__WEBPACK_IMPORTED_MODULE_2__["default"],
+  mutations: _objectSpread(_objectSpread({}, _tweets_mutations__WEBPACK_IMPORTED_MODULE_3__["default"]), {}, {
+    setUser: function setUser(data) {
+      console.log(data);
+    }
+  }),
+  actions: _objectSpread(_objectSpread({}, _tweets_actions__WEBPACK_IMPORTED_MODULE_4__["default"]), {}, {
+    getUser: function getUser(_ref, data) {
+      var commit = _ref.commit;
+      commit('setUser', data);
     }
   })
 });
@@ -46921,7 +47064,39 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("Profile")])
+  return _c("div", [
+    _c("div", { staticClass: "text-gray-300" }, [
+      _vm._v("Profile information"),
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      _vm._l(_vm.tweets, function (tweet) {
+        return _c("app-tweet", {
+          key: tweet.id,
+          staticClass: "w-full",
+          attrs: { tweet: tweet },
+        })
+      }),
+      1
+    ),
+    _vm._v(" "),
+    _vm.tweets.length
+      ? _c("div", {
+          directives: [
+            {
+              name: "observe-visibility",
+              rawName: "v-observe-visibility",
+              value: {
+                callback: _vm.handleToScrolledProfile,
+              },
+              expression:
+                "{\n            callback: handleToScrolledProfile,\n        }",
+            },
+          ],
+        })
+      : _vm._e(),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

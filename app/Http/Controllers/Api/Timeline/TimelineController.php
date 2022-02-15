@@ -18,6 +18,7 @@ class TimelineController extends Controller
 
     public function index(Request $req)
     {
+       
         $tweets = $req->user()
         ->tweetsFromFollowing()
         ->parent()
@@ -35,6 +36,8 @@ class TimelineController extends Controller
             'originalTweet.media.baseMedia',
         ])
         ->paginate(6);
+
+        ray(new TweetCollection($tweets));
 
         return new TweetCollection($tweets);
     }
