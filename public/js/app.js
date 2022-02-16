@@ -47659,7 +47659,7 @@ var staticRenderFns = [
         "div",
         {
           staticClass:
-            "rounded-xl border border-gray-100 p-2 text-xs h-8 text-center hover:bg-gray-800",
+            "rounded-xl border border-gray-100 p-2 text-xs h-8 flex items-center justify-center hover:bg-gray-800",
         },
         [_vm._v("\n                Edit Profile\n            ")]
       ),

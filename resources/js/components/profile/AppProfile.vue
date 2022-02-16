@@ -21,7 +21,7 @@
             <div class="flex justify-between mt-4">
                 <div></div>
                 <div
-                    class="rounded-xl border border-gray-100 p-2 text-xs h-8 text-center hover:bg-gray-800"
+                    class="rounded-xl border border-gray-100 p-2 text-xs h-8 flex items-center justify-center hover:bg-gray-800"
                 >
                     Edit Profile
                 </div>
