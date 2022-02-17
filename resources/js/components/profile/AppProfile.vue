@@ -3,25 +3,34 @@
         <div
             class="w-full inline-block p-4 border-b border-gray-800 text-gray-300"
         >
-            <div class="w-full inline-block h-12 border border-gray-400">
-                Banner image here
+            <div class="w-full h-10" @click="goTimeline">
+                <icon-left />
             </div>
-            <div class="flex justify-between mt-4">
+            <div
+                class="w-full inline-block h-40 bg-gradient-to-r from-sky-500 to-indigo-500 text-gray-200"
+            >
+                <div class="text-center">Banner image here</div>
+
                 <div>
                     <img
                         :src="user.avatar"
-                        class="w-12 h-12 mr-3 rounded-full"
+                        class="w-28 h-28 rounded-full mt-24 ml-2 border-4 border-gray-900"
                     />
                 </div>
+            </div>
+            <div class="flex justify-between mt-4">
+                <div></div>
                 <div
-                    class="bg-gray-500 rounded-lg text-gray-100 p-2 text-xs h-8"
+                    class="rounded-xl border border-gray-100 p-2 text-xs h-8 text-center hover:bg-gray-800"
                 >
                     Edit Profile
                 </div>
             </div>
-            <div class="text-gray-400 mt-4">
+            <div class="text-gray-300 mt-8 text-2xl">
                 {{ user.name }}
             </div>
+            <div class="text-gray-400 mt-1 text-md">@{{ user.username }}</div>
+
             <div class="text-gray-400 mt-4 flex">
                 <div>
                     <icon-calendar />
@@ -30,6 +39,20 @@
                     Joined in
                     {{ joinedInMonth }}
                     {{ joinedInYear }}
+                </div>
+            </div>
+            <div class="text-gray-400 mt-4 flex">
+                <div class="flex">
+                    <div class="mr-1 text-lg">
+                        {{ user.following.length }}
+                    </div>
+                    <div class="text-gray-300 text-lg">Following</div>
+                </div>
+                <div class="flex">
+                    <div class="ml-6 mr-1 text-lg">
+                        {{ user.followers.length }}
+                    </div>
+                    <div class="text-gray-300 text-lg">Followers</div>
                 </div>
             </div>
         </div>
@@ -132,7 +155,7 @@ export default {
 
         async loadTweets() {
             console.log("get profile tweets and info");
-            this.getTweets(this.urlWithPage).then((res) => {
+            this.getTweets(this.urlWithPage).then(() => {
                 this.getUser(window.User.id);
             });
         },
@@ -147,6 +170,9 @@ export default {
             console.log("at bottom");
             this.page++;
             this.loadTweets;
+        },
+        goTimeline() {
+            window.location.replace("http://twitter.test/home");
         },
     },
     mounted() {

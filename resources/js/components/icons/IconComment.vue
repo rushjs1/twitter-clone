@@ -6,7 +6,7 @@
             width="24"
             height="24"
             :class="
-                count > 1
+                count > 0
                     ? 'fill-current text-blue-600 w-5 mr-2'
                     : 'fill-current text-gray-600 w-5 mr-2'
             "

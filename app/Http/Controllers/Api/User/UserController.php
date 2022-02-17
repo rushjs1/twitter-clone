@@ -12,7 +12,10 @@ class UserController extends Controller
     //
     public function index(Request $req)
     {
-        $user = User::where('id', $req->id)->first();
+        $user = User::with([
+            'followers',
+            'following'
+        ])->where('id', $req->id)->first();
         return new UserResourceForProfile($user);
     }
 }

@@ -37,8 +37,6 @@ class TimelineController extends Controller
         ])
         ->paginate(6);
 
-        ray(new TweetCollection($tweets));
-
         return new TweetCollection($tweets);
     }
 }
