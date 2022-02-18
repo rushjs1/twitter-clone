@@ -3,7 +3,9 @@
         <span class="text-gray-300 font-bold">
             {{ user.name }}
         </span>
-        <span class="text-gray-600 font-normal"> @{{ user.username }} </span>
+        <span class="text-gray-600 font-normal">
+            <a href="">@{{ user.username }}</a>
+        </span>
     </div>
 </template>
 

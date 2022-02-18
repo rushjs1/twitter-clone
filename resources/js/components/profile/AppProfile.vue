@@ -75,10 +75,14 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import IconCalendar from "../icons/IconCalendar.vue";
 export default {
-    components: { IconCalendar },
     name: "AppProfile",
+    props: {
+        user: {
+            type: Object,
+            required: true,
+        },
+    },
     data() {
         return {
             page: 1,
@@ -177,6 +181,7 @@ export default {
     },
     mounted() {
         this.loadTweets();
+        console.log(this.user);
     },
 };
 </script>
