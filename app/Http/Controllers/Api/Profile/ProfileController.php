@@ -8,15 +8,17 @@ use App\Models\Tweet;
 use App\Http\Resources\TweetCollection;
 use App\Http\Resources\TweetResource;
 use App\Models\TweetMedia; 
+use App\Models\User;
 
 class ProfileController extends Controller
 {
-    //
-
-    public function index(Request $req)
+    
+    public function index(Request $req, User $username)
     {
-        
-         $tweets = $req->user()->tweets()->with([
+    
+        ray($username);
+
+        $tweets = $req->user()->tweets()->with([
             'user',
             'likes',
             'retweets',

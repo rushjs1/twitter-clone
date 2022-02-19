@@ -27,9 +27,9 @@ Route::get('/timeline', [App\Http\Controllers\Api\Timeline\TimelineController::c
 
 Route::get('/tweets/{tweet}', [App\Http\Controllers\Tweets\TweetController::class, 'show']);
 
-Route::get('/profile', [App\Http\Controllers\Profile\ProfileController::class, 'index']);
+Route::get('/profile/{username}', [App\Http\Controllers\Profile\ProfileController::class, 'index']);
 
-Route::get('/api/profile', [App\Http\Controllers\Api\Profile\ProfileController::class, 'index']);
+Route::get('/profile/api/profile', [App\Http\Controllers\Api\Profile\ProfileController::class, 'index']);
 
 Route::get('/api/notifications' , [App\Http\Controllers\Api\Notifications\NotificationController::class, 'index']);
 
