@@ -13,7 +13,7 @@ class ProfileController extends Controller
 {
     //
 
-    public function index(Request $req, User $user)
+    public function index(Request $req)
     {
         
          $tweets = $req->user()->tweets()->with([
