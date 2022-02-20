@@ -6526,8 +6526,11 @@ __webpack_require__.r(__webpack_exports__);
       window.location.replace("http://twitter.test/notifications");
     },
     goProfile: function goProfile() {
-      window.location.replace("http://twitter.test/profile");
+      window.location.replace("http://twitter.test/profile/".concat(window.User.username));
     }
+  },
+  mounted: function mounted() {
+    console.log(window);
   }
 });
 
@@ -6859,12 +6862,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "AppProfile",
-  props: {
-    user: {
-      type: Object,
-      required: true
-    }
-  },
+
+  /*    props: {
+      user: {
+          type: Object,
+          required: true,
+      },
+  }, */
   data: function data() {
     return {
       page: 1,

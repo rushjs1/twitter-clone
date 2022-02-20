@@ -16,8 +16,6 @@ class ProfileController extends Controller
     public function index(Request $req, User $username)
     {
     
-        ray($username);
-
         $tweets = $req->user()->tweets()->with([
             'user',
             'likes',

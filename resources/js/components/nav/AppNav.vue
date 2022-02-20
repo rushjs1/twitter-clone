@@ -25,8 +25,13 @@ export default {
             window.location.replace("http://twitter.test/notifications");
         },
         goProfile() {
-            window.location.replace("http://twitter.test/profile");
+            window.location.replace(
+                `http://twitter.test/profile/${window.User.username}`
+            );
         },
+    },
+    mounted() {
+        console.log(window);
     },
 };
 </script>

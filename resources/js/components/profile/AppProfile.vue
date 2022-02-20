@@ -77,12 +77,12 @@
 import { mapActions, mapGetters } from "vuex";
 export default {
     name: "AppProfile",
-    props: {
+    /*    props: {
         user: {
             type: Object,
             required: true,
         },
-    },
+    }, */
     data() {
         return {
             page: 1,
